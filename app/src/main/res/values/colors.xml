@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="color_cancel_button">#F48FB1</color>
+    <color name="color_create_button">#A5D6A7</color>
+
 </resources>

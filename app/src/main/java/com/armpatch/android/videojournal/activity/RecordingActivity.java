@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -17,10 +19,13 @@ import java.util.UUID;
 
 public class RecordingActivity extends AppCompatActivity {
 
+    private static final String EXTRA_KEY_ID = "activity.RecordingActivity.id";
+
     Recording recording;
 
     VideoView videoView;
     TextView recordingTitleText, songTitleText, dateText, notesText;
+    Button cancelButton, createButton;
 
     public static Intent newIntent(Context packageContext, UUID recordingId) {
         Intent intent = new Intent(packageContext, RecordingActivity.class);
@@ -34,7 +39,7 @@ public class RecordingActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.recording_activity);
         findViewsById();
-        setRecordingField();
+        getRecording();
         updateViews();
 
         super.onCreate(savedInstanceState);
@@ -46,9 +51,32 @@ public class RecordingActivity extends AppCompatActivity {
         songTitleText = findViewById(R.id.song_title);
         dateText = findViewById(R.id.date);
         notesText = findViewById(R.id.notes);
+        cancelButton = findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        createButton = findViewById(R.id.create_button);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptToSaveRecording();
+            }
+        });
     }
 
-    private void setRecordingField() {
+    private void attemptToSaveRecording() {
+        if (recording.videoPath == null) {
+            finish();
+        }
+        RecordingFactory.get(this).addRecording(recording);
+        finish();
+    }
+
+    private void getRecording() {
         UUID recordingID = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
 
         if (recordingID == null) {
