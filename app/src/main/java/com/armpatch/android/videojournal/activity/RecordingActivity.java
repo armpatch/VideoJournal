@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.armpatch.android.videojournal.R;
+import com.armpatch.android.videojournal.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
+import com.armpatch.android.videojournal.model.RecordingFactory;
 
 import java.util.UUID;
 
 public class RecordingActivity extends AppCompatActivity {
 
-    UUID recordingId;
+    Recording recording;
 
     VideoView videoView;
+    TextView recordingTitleText, songTitleText, dateText, notesText;
 
     public static Intent newIntent(Context packageContext, UUID recordingId) {
         Intent intent = new Intent(packageContext, RecordingActivity.class);
@@ -27,20 +32,43 @@ public class RecordingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        recordingId = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
-        if (recordingId == null) {
-
-
-
-
-
-
-
-
-        }
+        setContentView(R.layout.recording_activity);
+        findViewsById();
+        setRecordingField();
+        updateViews();
 
         super.onCreate(savedInstanceState);
     }
 
+    private void findViewsById() {
+        videoView = findViewById(R.id.videoView);
+        recordingTitleText = findViewById(R.id.recording_title);
+        songTitleText = findViewById(R.id.song_title);
+        dateText = findViewById(R.id.date);
+        notesText = findViewById(R.id.notes);
+    }
 
+    private void setRecordingField() {
+        UUID recordingID = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
+
+        if (recordingID == null) {
+            createNewRecording();
+        } else {
+            recording = RecordingFactory.get(this).getRecording(recordingID);
+        }
+    }
+
+    private void createNewRecording() {
+        recording = new Recording();
+        recording.recordingTitle = "Recording Title";
+        recording.songTitle = "Song Title";
+        recording.notes = "recording notes...";
+    }
+
+    private void updateViews() {
+        recordingTitleText.setText(recording.recordingTitle);
+        songTitleText.setText(recording.songTitle);
+        dateText.setText(TextFormatter.getSimpleDateString(recording.date));
+        notesText.setText(recording.notes);
+    }
 }

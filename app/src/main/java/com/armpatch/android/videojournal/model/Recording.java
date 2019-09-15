@@ -8,6 +8,7 @@ public class Recording {
     public static final String EXTRA_KEY = "com.armpatch.android.videojournal.model.Recording";
 
     private UUID uuid;
+
     public String recordingTitle;
     public String songTitle;
     public Date date;
