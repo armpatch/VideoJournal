@@ -13,7 +13,11 @@ public class Recording {
     public String videoPath;
 
     public Recording() {
-        uuid = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Recording(UUID uuid) {
+        this.uuid = uuid;
         date = new Date();
     }
 
