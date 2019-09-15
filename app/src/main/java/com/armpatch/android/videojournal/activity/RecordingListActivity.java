@@ -1,5 +1,6 @@
 package com.armpatch.android.videojournal.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ public class RecordingListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private RecordingAdapter recordingAdapter;
+
+    private static final int REQUEST_NEW_RECORDING = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class RecordingListActivity extends AppCompatActivity {
     }
 
     void createNewRecording() {
-        RecordingActivity.newIntent(this, null);
+        Intent intent = RecordingActivity.newIntent(this, null);
+        startActivityForResult(intent, REQUEST_NEW_RECORDING);
     }
 }

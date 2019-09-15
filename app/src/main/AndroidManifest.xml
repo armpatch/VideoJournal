@@ -18,5 +18,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.RecordingActivity" />
+
     </application>
 </manifest>
