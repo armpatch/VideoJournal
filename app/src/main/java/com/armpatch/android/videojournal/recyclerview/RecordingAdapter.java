@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal;
+package com.armpatch.android.videojournal.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.armpatch.android.videojournal.activities.Recording;
+import com.armpatch.android.videojournal.model.Recording;
 
 import java.util.List;
 

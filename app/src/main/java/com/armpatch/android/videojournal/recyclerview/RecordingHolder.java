@@ -1,13 +1,14 @@
-package com.armpatch.android.videojournal;
+package com.armpatch.android.videojournal.recyclerview;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.armpatch.android.videojournal.activities.Recording;
+import com.armpatch.android.videojournal.R;
+import com.armpatch.android.videojournal.model.Recording;
+import com.armpatch.android.videojournal.TextFormatter;
 
 public class RecordingHolder extends RecyclerView.ViewHolder {
 

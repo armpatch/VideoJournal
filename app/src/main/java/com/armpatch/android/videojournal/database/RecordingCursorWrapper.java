@@ -3,7 +3,7 @@ package com.armpatch.android.videojournal.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.armpatch.android.videojournal.activities.Recording;
+import com.armpatch.android.videojournal.model.Recording;
 
 import com.armpatch.android.videojournal.database.DatabaseSchema.RecordingTable;
 

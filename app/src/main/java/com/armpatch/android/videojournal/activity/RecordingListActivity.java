@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.activities;
+package com.armpatch.android.videojournal.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.RecordingAdapter;
-import com.armpatch.android.videojournal.RecordingFactory;
+import com.armpatch.android.videojournal.model.Recording;
+import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
+import com.armpatch.android.videojournal.model.RecordingFactory;
 
 import java.util.List;
 
@@ -32,23 +33,6 @@ public class RecordingListActivity extends AppCompatActivity {
         updateRecyclerView();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.recording_list_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_new_recording:
-                // TODO show new songs page
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void updateRecyclerView() {
         RecordingFactory recordingFactory = RecordingFactory.get(this);
         List<Recording> recordings = recordingFactory.getRecordings();
@@ -60,5 +44,24 @@ public class RecordingListActivity extends AppCompatActivity {
             recordingAdapter.setRecordings(recordings);
             recordingAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recording_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_new_recording) {
+            createNewRecording();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void createNewRecording() {
+        RecordingActivity.newIntent(this, null);
     }
 }

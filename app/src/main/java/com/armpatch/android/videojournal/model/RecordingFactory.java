@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal;
+package com.armpatch.android.videojournal.model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.armpatch.android.videojournal.activities.Recording;
 import com.armpatch.android.videojournal.database.RecordingCursorWrapper;
 import com.armpatch.android.videojournal.database.RecordingDbHelper;
 

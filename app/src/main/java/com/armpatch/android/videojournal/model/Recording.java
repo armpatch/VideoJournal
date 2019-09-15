@@ -1,9 +1,11 @@
-package com.armpatch.android.videojournal.activities;
+package com.armpatch.android.videojournal.model;
 
 import java.util.Date;
 import java.util.UUID;
 
 public class Recording {
+
+    public static final String EXTRA_KEY = "com.armpatch.android.videojournal.model.Recording";
 
     private UUID uuid;
     public String recordingTitle;
