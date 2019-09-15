@@ -6,16 +6,18 @@ import java.util.UUID;
 public class Recording {
 
     private UUID uuid;
-    private Date date;
-    private String notes;
-    private String videoPath;
+    public String recordingTitle;
+    public String songTitle;
+    public Date date;
+    public String notes;
+    public String videoPath;
 
     public Recording() {
-        this(UUID.randomUUID());
+        uuid = UUID.randomUUID();
+        date = new Date();
     }
 
-    public Recording(UUID id) {
-        uuid = id;
-        date = new Date();
+    public UUID getId() {
+        return uuid;
     }
 }
