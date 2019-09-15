@@ -15,7 +15,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingHolder> {
     private Context activityContext;
     private List<Recording> recordings;
 
-    RecordingAdapter(Context activityContext, List<Recording> recordings) {
+    public RecordingAdapter(Context activityContext, List<Recording> recordings) {
         this.activityContext = activityContext;
         this.recordings = recordings;
     }
@@ -37,7 +37,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingHolder> {
         return recordings.size();
     }
 
-    public void setSongs(List<Recording> recordings) {
+    public void setRecordings(List<Recording> recordings) {
         this.recordings = recordings;
     }
 }

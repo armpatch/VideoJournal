@@ -10,6 +10,9 @@ import android.view.View;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.RecordingAdapter;
+import com.armpatch.android.videojournal.RecordingFactory;
+
+import java.util.List;
 
 public class RecordingListActivity extends AppCompatActivity {
 
@@ -39,7 +42,7 @@ public class RecordingListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_new_recording:
-                // TODO do something
+                // TODO show new songs page
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -47,6 +50,15 @@ public class RecordingListActivity extends AppCompatActivity {
     }
 
     private void updateRecyclerView(){
+        RecordingFactory recordingFactory = RecordingFactory.get(this);
+        List<Recording> recordings = recordingFactory.getRecordings();
 
+        if (recordingAdapter == null) {
+            recordingAdapter = new RecordingAdapter(this, recordings);
+            recyclerView.setAdapter(recordingAdapter);
+        } else {
+            recordingAdapter.setRecordings(recordings);
+            recordingAdapter.notifyDataSetChanged();
+        }
     }
 }
