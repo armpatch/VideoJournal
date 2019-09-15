@@ -1,12 +1,11 @@
 package com.armpatch.android.videojournal.activities;
 
-import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.RecordingAdapter;
@@ -20,10 +19,11 @@ public class RecordingListActivity extends AppCompatActivity {
     private RecordingAdapter recordingAdapter;
 
     @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.recording_list_activity);
 
-        return super.onCreateView(parent, name, context, attrs);
+        recyclerView = findViewById(R.id.recycler_view);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RecordingListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.recording_list_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RecordingListActivity extends AppCompatActivity {
         }
     }
 
-    private void updateRecyclerView(){
+    private void updateRecyclerView() {
         RecordingFactory recordingFactory = RecordingFactory.get(this);
         List<Recording> recordings = recordingFactory.getRecordings();
 

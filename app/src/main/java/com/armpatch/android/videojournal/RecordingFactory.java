@@ -90,7 +90,7 @@ public class RecordingFactory {
         return new RecordingCursorWrapper(cursor);
     }
 
-    public void addRecordingToDatabase(Recording recording) {
+    public void addRecording(Recording recording) {
         ContentValues values = getContentValues(recording);
         database.insert(NAME, null, values);
     }
