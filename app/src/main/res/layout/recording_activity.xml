@@ -13,11 +13,13 @@
         />
 
     <RelativeLayout
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        android:layout_marginEnd="8dp"
+        android:background="@android:drawable/editbox_background_normal">
 
         <TextView
             android:id="@+id/recording_title"
@@ -51,15 +53,32 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/notes"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="8dp"
         android:layout_weight="1"
-        android:textSize="15sp"
-        tools:text="this is a test note"
-        />
+        android:background="@android:drawable/editbox_background_normal">
+
+        <TextView
+            android:id="@+id/notes_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/notes_title"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            tools:text="this is a test note"
+            android:layout_below="@+id/notes_title"
+            />
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
