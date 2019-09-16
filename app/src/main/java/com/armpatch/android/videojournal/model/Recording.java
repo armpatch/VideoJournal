@@ -21,7 +21,10 @@ public class Recording {
 
     public Recording(UUID uuid) {
         this.uuid = uuid;
+        recordingTitle = "";
+        songTitle = "";
         date = new Date();
+        notes = "";
     }
 
     public UUID getId() {

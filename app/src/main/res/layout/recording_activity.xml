@@ -1,80 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="4dp"
-        />
+        android:layout_margin="4dp" />
 
     <RelativeLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@android:drawable/editbox_background_normal">
+        android:layout_below="@id/videoView"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
 
-        <TextView
+        <EditText
             android:id="@+id/recording_title"
+            style="@android:style/Widget.TextView"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:text="Recording Title"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:gravity="bottom"
+            android:hint="@string/recording_title_hint"
+            android:inputType="text"
+            android:maxLines="1"
             android:textColor="@android:color/black"
-            android:gravity="bottom"/>
+            android:textSize="20sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/song_title"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_alignParentStart="true"
             android:layout_below="@id/recording_title"
-            android:text="Song Title"
-            android:gravity="bottom"/>
+            android:layout_alignParentStart="true"
+            android:background="@android:color/transparent"
+            android:gravity="bottom"
+            android:hint="@string/song_title_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:text="10/10/2019"
-            />
+            android:layout_alignParentEnd="true"
+            android:text="10/10/2019" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
+        android:layout_height="150dp"
+        android:layout_below="@id/title_layout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:background="@android:drawable/editbox_background_normal">
 
         <TextView
             android:id="@+id/notes_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
             android:text="@string/notes_title"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            tools:text="this is a test note"
             android:layout_below="@+id/notes_title"
+            android:gravity="top|start"
+            android:hint="@string/enter_notes_hint"
+            android:maxHeight="150dp"
+            android:textSize="15sp"
+            android:inputType="text"
+            android:nextFocusDown="@id/create_button"
             />
 
     </RelativeLayout>
@@ -83,25 +94,27 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp">
 
         <Button
             android:id="@+id/create_button"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:text="Create"
             android:layout_alignParentEnd="true"
-            />
+            android:text="Create"
+            android:focusable="true"/>
 
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:text="Cancel"
             android:layout_alignParentStart="true"
-            />
+            android:text="Cancel" />
 
     </RelativeLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

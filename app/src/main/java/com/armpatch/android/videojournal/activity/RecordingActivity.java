@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
@@ -24,7 +24,8 @@ public class RecordingActivity extends AppCompatActivity {
     Recording recording;
 
     VideoView videoView;
-    TextView recordingTitleText, songTitleText, dateText, notesText;
+    TextView dateText;
+    EditText recordingTitleText, songTitleText, notesText;
     Button cancelButton, createButton;
 
     public static Intent newIntent(Context packageContext, UUID recordingId) {
@@ -37,12 +38,13 @@ public class RecordingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.recording_activity);
         findViewsById();
+        setListeners();
         getRecording();
         updateViews();
-
-        super.onCreate(savedInstanceState);
     }
 
     private void findViewsById() {
@@ -60,6 +62,9 @@ public class RecordingActivity extends AppCompatActivity {
         });
 
         createButton = findViewById(R.id.create_button);
+    }
+
+    private void setListeners() {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,17 +85,10 @@ public class RecordingActivity extends AppCompatActivity {
         UUID recordingID = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
 
         if (recordingID == null) {
-            createNewRecording();
+            recording = new Recording();
         } else {
             recording = RecordingFactory.get(this).getRecording(recordingID);
         }
-    }
-
-    private void createNewRecording() {
-        recording = new Recording();
-        recording.recordingTitle = "Recording Title";
-        recording.songTitle = "Song Title";
-        recording.notes = "recording notes...";
     }
 
     private void updateViews() {
