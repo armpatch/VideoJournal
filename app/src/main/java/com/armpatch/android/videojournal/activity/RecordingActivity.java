@@ -2,6 +2,7 @@ package com.armpatch.android.videojournal.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -42,9 +43,9 @@ public class RecordingActivity extends AppCompatActivity {
 
         setContentView(R.layout.recording_activity);
         findViewsById();
-        setListeners();
         getRecording();
-        updateViews();
+        updateTextFieldsFromRecording();
+        setListeners();
     }
 
     private void findViewsById() {
@@ -74,11 +75,29 @@ public class RecordingActivity extends AppCompatActivity {
     }
 
     private void attemptToSaveRecording() {
-        if (recording.videoPath == null) {
-            finish();
+        if (recordingIsSavable()) {
+            recording.recordingTitle = recordingTitleText.getText().toString();
+            recording.songTitle = songTitleText.getText().toString();
+            recording.notes = notesText.getText().toString();
+
+            RecordingFactory.get(this).addRecording(recording);
+        } else {
+            // TODO alert the user
         }
-        RecordingFactory.get(this).addRecording(recording);
+
         finish();
+    }
+
+    private boolean recordingIsSavable() {
+        if (recording.videoPath == null)
+            return false;
+        if (recordingTitleText.getText().toString().length() < 1)
+            return false;
+        if (songTitleText.getText().toString().length() < 1)
+            return false;
+
+
+        return true;
     }
 
     private void getRecording() {
@@ -88,10 +107,11 @@ public class RecordingActivity extends AppCompatActivity {
             recording = new Recording();
         } else {
             recording = RecordingFactory.get(this).getRecording(recordingID);
+            videoView.setVideoPath(recording.videoPath);
         }
     }
 
-    private void updateViews() {
+    private void updateTextFieldsFromRecording() {
         recordingTitleText.setText(recording.recordingTitle);
         songTitleText.setText(recording.songTitle);
         dateText.setText(TextFormatter.getSimpleDateString(recording.date));
