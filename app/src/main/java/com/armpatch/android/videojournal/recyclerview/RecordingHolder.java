@@ -1,27 +1,32 @@
 package com.armpatch.android.videojournal.recyclerview;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.TextView;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.TextFormatter;
+import com.armpatch.android.videojournal.model.Recording;
 
-public class RecordingHolder extends RecyclerView.ViewHolder {
+public class RecordingHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener {
 
+    public interface Callbacks {
+        void onRecordingSelected(Recording recording);
+    }
 
+    private Callbacks callbacks;
     private Recording recording;
 
     private TextView recordingTitle;
     private TextView songTitle;
     private TextView date;
 
-    public RecordingHolder(Context context, LayoutInflater inflater, ViewGroup parent) {
-        super(inflater.inflate(R.layout.recording_list_item, parent, false));
+    public RecordingHolder(View view) {
+        super(view);
 
+        callbacks = (Callbacks) view.getContext();
+        itemView.setOnClickListener(this);
         recordingTitle = itemView.findViewById(R.id.recording_title);
         songTitle = itemView.findViewById(R.id.song_title);
         date = itemView.findViewById(R.id.date);
@@ -34,5 +39,10 @@ public class RecordingHolder extends RecyclerView.ViewHolder {
 
         String dateString = TextFormatter.getSimpleDateString(recording.date);
         date.setText(dateString);
+    }
+
+    @Override
+    public void onClick(View v) {
+        callbacks.onRecordingSelected(recording);
     }
 }

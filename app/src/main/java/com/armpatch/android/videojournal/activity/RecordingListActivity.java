@@ -13,15 +13,14 @@ import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
 import com.armpatch.android.videojournal.model.RecordingFactory;
+import com.armpatch.android.videojournal.recyclerview.RecordingHolder;
 
 import java.util.List;
 
-public class RecordingListActivity extends AppCompatActivity {
+public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
 
     RecyclerView recyclerView;
     private RecordingAdapter recordingAdapter;
-
-    private static final int REQUEST_NEW_RECORDING = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,14 +59,14 @@ public class RecordingListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_new_recording) {
-            createNewRecording();
+            startActivity(RecordingActivity.newIntent(this, null));
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    void createNewRecording() {
-        Intent intent = RecordingActivity.newIntent(this, null);
-        startActivityForResult(intent, REQUEST_NEW_RECORDING);
+    @Override
+    public void onRecordingSelected(Recording recording) {
+        startActivity(RecordingActivity.newIntent(this, recording.getId()));
     }
 }
