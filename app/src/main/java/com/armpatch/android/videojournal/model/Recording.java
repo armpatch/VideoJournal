@@ -25,6 +25,7 @@ public class Recording {
         songTitle = "";
         date = new Date();
         notes = "";
+        videoPath = "";
     }
 
     public UUID getId() {
