@@ -31,4 +31,8 @@ public class Recording {
     public UUID getId() {
         return uuid;
     }
+
+    public boolean hasVideo() {
+        return (videoPath.length() > 0);
+    }
 }

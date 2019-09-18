@@ -63,6 +63,46 @@ public class RecordingActivity extends AppCompatActivity {
         createButton = findViewById(R.id.create_button);
     }
 
+    private void dispatchRecordIntent() {
+        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+        }
+    }
+
+    private void attemptToSaveRecording() {
+        if (recording.hasVideo()) {
+            recording.recordingTitle = recordingTitleText.getText().toString();
+            recording.songTitle = songTitleText.getText().toString();
+            recording.notes = notesText.getText().toString();
+
+            RecordingFactory.get(this).addRecording(recording);
+        } else {
+            // TODO alert the user
+        }
+
+        finish();
+    }
+
+    private void getRecording() {
+        UUID recordingID = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
+
+        if (recordingID == null) {
+            recording = new Recording();
+        } else {
+            recording = RecordingFactory.get(this).getRecording(recordingID);
+            videoView.setVideoPath(recording.videoPath);
+            Log.v(TAG, "Path = " + recording.videoPath);
+        }
+    }
+
+    private void updateTextFieldsFromRecording() {
+        recordingTitleText.setText(recording.recordingTitle);
+        songTitleText.setText(recording.songTitle);
+        dateText.setText(TextFormatter.getSimpleDateString(recording.date));
+        notesText.setText(recording.notes);
+    }
+
     private void setListeners() {
         videoView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,63 +130,13 @@ public class RecordingActivity extends AppCompatActivity {
         });
     }
 
-    private void dispatchRecordIntent() {
-        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-        }
-    }
-
-    private void attemptToSaveRecording() {
-        if (recordingIsSavable()) {
-            recording.recordingTitle = recordingTitleText.getText().toString();
-            recording.songTitle = songTitleText.getText().toString();
-            recording.notes = notesText.getText().toString();
-
-            RecordingFactory.get(this).addRecording(recording);
-        } else {
-            // TODO alert the user
-        }
-
-        finish();
-    }
-
-    private boolean recordingIsSavable() {
-        if (recording.videoPath.length() < 1)
-            return false;
-        if (recordingTitleText.getText().toString().length() < 1)
-            return false;
-        if (songTitleText.getText().toString().length() < 1)
-            return false;
-
-        return true;
-    }
-
-    private void getRecording() {
-        UUID recordingID = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
-
-        if (recordingID == null) {
-            recording = new Recording();
-        } else {
-            recording = RecordingFactory.get(this).getRecording(recordingID);
-            videoView.setVideoPath(recording.videoPath);
-        }
-    }
-
-    private void updateTextFieldsFromRecording() {
-        recordingTitleText.setText(recording.recordingTitle);
-        songTitleText.setText(recording.songTitle);
-        dateText.setText(TextFormatter.getSimpleDateString(recording.date));
-        notesText.setText(recording.notes);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = intent.getData();
-            recording.videoPath = videoUri.toString();
+            recording.videoPath = videoUri.getPath();
             videoView.setVideoURI(videoUri);
             Log.v(TAG, videoUri.toString());
         }
-    }
+}
 }
