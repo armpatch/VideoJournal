@@ -23,8 +23,8 @@ import java.util.UUID;
 public class RecordingActivity extends AppCompatActivity {
 
     private static final String EXTRA_KEY_ID = "activity.RecordingActivity.id";
-
     static final int REQUEST_VIDEO_CAPTURE = 1;
+
     public static final String TAG = "RecordingActivityTag";
 
     Recording recording;
@@ -61,27 +61,6 @@ public class RecordingActivity extends AppCompatActivity {
         notesText = findViewById(R.id.notes);
         cancelButton = findViewById(R.id.cancel_button);
         createButton = findViewById(R.id.create_button);
-    }
-
-    private void dispatchRecordIntent() {
-        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-        }
-    }
-
-    private void attemptToSaveRecording() {
-        if (recording.hasVideo()) {
-            recording.recordingTitle = recordingTitleText.getText().toString();
-            recording.songTitle = songTitleText.getText().toString();
-            recording.notes = notesText.getText().toString();
-
-            RecordingFactory.get(this).addRecording(recording);
-        } else {
-            // TODO alert the user
-        }
-
-        finish();
     }
 
     private void getRecording() {
@@ -130,13 +109,35 @@ public class RecordingActivity extends AppCompatActivity {
         });
     }
 
+    private void dispatchRecordIntent() {
+        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+        }
+    }
+
+    private void attemptToSaveRecording() {
+        if (recording.hasVideo()) {
+            recording.recordingTitle = recordingTitleText.getText().toString();
+            recording.songTitle = songTitleText.getText().toString();
+            recording.notes = notesText.getText().toString();
+
+            RecordingFactory.get(this).addRecording(recording);
+        } else {
+            // TODO alert the user
+        }
+
+        finish();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = intent.getData();
-            recording.videoPath = videoUri.getPath();
+            Log.v(TAG, "onActivityResult - videoUri.toString() = " + videoUri.toString());
+            recording.videoPath = videoUri.toString();
             videoView.setVideoURI(videoUri);
             Log.v(TAG, videoUri.toString());
         }
-}
+    }
 }
