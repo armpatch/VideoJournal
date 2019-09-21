@@ -20,7 +20,6 @@ public class RecordingFactory {
 
     private static RecordingFactory recordingFactory;
     private SQLiteDatabase database;
-    private Context applicationContext;
 
     public static RecordingFactory get(Context context) {
         if (recordingFactory == null) {
@@ -31,7 +30,6 @@ public class RecordingFactory {
     }
 
     private RecordingFactory(Context context) {
-        applicationContext = context.getApplicationContext();
         database = new RecordingDbHelper(context).getWritableDatabase();
     }
 
@@ -101,7 +99,7 @@ public class RecordingFactory {
         values.put(SONG_TITLE, recording.songTitle);
         values.put(DATE, recording.date.getTime());
         values.put(NOTES, recording.notes);
-        values.put(VIDEO_PATH, recording.videoPath);
+        values.put(VIDEO_PATH, recording.getPath());
 
         return values;
     }

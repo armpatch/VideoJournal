@@ -1,6 +1,7 @@
 package com.armpatch.android.videojournal.activity;
 
-import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import java.util.List;
 
 public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
 
+    private static final int REQUEST_WRITE_ACCESS_CODE = 1;
+
     RecyclerView recyclerView;
     private RecordingAdapter recordingAdapter;
 
@@ -26,6 +29,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recording_list_activity);
+        requestPermissions();
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,5 +72,11 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     public void onRecordingSelected(Recording recording) {
         startActivity(RecordingActivity.newIntent(this, recording.getId()));
+    }
+
+    public void requestPermissions() {
+        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_ACCESS_CODE);
+        }
     }
 }
