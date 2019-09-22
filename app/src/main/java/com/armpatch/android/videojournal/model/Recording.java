@@ -1,5 +1,6 @@
 package com.armpatch.android.videojournal.model;
 
+import android.appwidget.AppWidgetProviderInfo;
 import android.net.Uri;
 
 import java.util.Date;
@@ -30,12 +31,16 @@ public class Recording {
         path = "";
     }
 
-    public UUID getId() {
-        return uuid;
+    public String getVideoFilename() {
+        return "VIDEO_" + getId().toString() + ".mp4";
     }
 
     public boolean containsVideo() {
         return (path.length() > 0);
+    }
+
+    public UUID getId() {
+        return uuid;
     }
 
     public void setPath(Uri uri) {

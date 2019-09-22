@@ -2,31 +2,41 @@ package com.armpatch.android.videojournal.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.FontRequest;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 
+import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 public class RecordingActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
+    public static final String VIDEO_FOLDER_NAME = "my_666_videos";
     public static final String TAG = "RecordingActivityTag";
+    public static final String EXTRA_APP_DIRECTORY = "RecordingActivity.appDirectory";
 
     Recording recording;
+    private File videoFile;
 
     VideoView videoView;
     TextView dateText;
@@ -71,6 +81,8 @@ public class RecordingActivity extends AppCompatActivity {
             recording = RecordingFactory.get(this).getRecording(uuid);
             videoView.setVideoURI(Uri.parse(recording.getPath()));
         }
+
+        videoFile = RecordingFactory.get(this).getVideoFile(recording);
     }
 
     private void setTextFieldsFromRecording() {
@@ -110,6 +122,18 @@ public class RecordingActivity extends AppCompatActivity {
     private void dispatchRecordIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
+        Uri uri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", videoFile);
+
+        takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+        List<ResolveInfo> cameraActivities = getPackageManager().
+                queryIntentActivities(takeVideoIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        for (ResolveInfo activity : cameraActivities) {
+            grantUriPermission(activity.activityInfo.packageName, uri,
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
+
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
         }
@@ -136,7 +160,11 @@ public class RecordingActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri uri = intent.getData();
-            Log.v(TAG, "onActivityResult(): uri.toString = " + uri.toString());
+
+            String saveMessage =  "Video was saved at: " + uri.toString();
+
+            Log.v(TAG, saveMessage);
+            Toast.makeText(this, saveMessage, Toast.LENGTH_LONG).show();
             videoView.setVideoURI(uri);
             recording.setPath(uri);
         }

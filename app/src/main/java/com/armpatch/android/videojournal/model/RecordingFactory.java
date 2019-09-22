@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.armpatch.android.videojournal.database.RecordingCursorWrapper;
 import com.armpatch.android.videojournal.database.RecordingDbHelper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class RecordingFactory {
 
     private static RecordingFactory recordingFactory;
     private SQLiteDatabase database;
+    private Context appContext;
 
     public static RecordingFactory get(Context context) {
         if (recordingFactory == null) {
@@ -31,6 +33,7 @@ public class RecordingFactory {
 
     private RecordingFactory(Context context) {
         database = new RecordingDbHelper(context).getWritableDatabase();
+        appContext = context;
     }
 
     public List<Recording> getRecordings() {
@@ -62,6 +65,11 @@ public class RecordingFactory {
         } finally {
             cursor.close();
         }
+    }
+
+    public File getVideoFile(Recording recording) {
+        File filesDir = appContext.getFilesDir();
+        return new File(filesDir, recording.getVideoFilename());
     }
 
     public void updateRecording(Recording recording) {
