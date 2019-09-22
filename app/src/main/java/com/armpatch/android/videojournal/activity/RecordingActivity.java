@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.FontRequest;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.TextFormatter;
@@ -31,9 +29,7 @@ public class RecordingActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
-    public static final String VIDEO_FOLDER_NAME = "my_666_videos";
     public static final String TAG = "RecordingActivityTag";
-    public static final String EXTRA_APP_DIRECTORY = "RecordingActivity.appDirectory";
 
     Recording recording;
     private File videoFile;
@@ -161,12 +157,16 @@ public class RecordingActivity extends AppCompatActivity {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri uri = intent.getData();
 
-            String saveMessage =  "Video was saved at: " + uri.toString();
+            if (uri == null)
+                return;
 
-            Log.v(TAG, saveMessage);
-            Toast.makeText(this, saveMessage, Toast.LENGTH_LONG).show();
             videoView.setVideoURI(uri);
             recording.setPath(uri);
+
+            String saveMessage =  "Video was saved at: " + uri.toString();
+            Log.v(TAG, saveMessage);
+
+
         }
     }
 }

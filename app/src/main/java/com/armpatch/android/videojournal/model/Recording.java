@@ -1,6 +1,5 @@
 package com.armpatch.android.videojournal.model;
 
-import android.appwidget.AppWidgetProviderInfo;
 import android.net.Uri;
 
 import java.util.Date;
