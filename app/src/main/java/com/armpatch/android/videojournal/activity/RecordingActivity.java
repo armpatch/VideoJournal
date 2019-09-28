@@ -55,7 +55,6 @@ public class RecordingActivity extends AppCompatActivity {
         getRecording();
         setTextFieldsFromRecording();
         setListeners();
-
     }
 
     private void findViewsById() {
@@ -159,4 +158,5 @@ public class RecordingActivity extends AppCompatActivity {
 
         }
     }
+
 }

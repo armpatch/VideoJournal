@@ -4,17 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <VideoView
-        android:id="@+id/videoView"
+    <LinearLayout
+        android:id="@+id/videoview_layout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="4dp" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/videoView"
+        android:layout_below="@id/videoview_layout"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="12dp"
