@@ -100,16 +100,4 @@
         android:focusable="true"
         android:text="Create" />
 
-    <Button
-        android:id="@+id/create_bitmap_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CreateBitmap"
-        android:layout_above="@id/create_button"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="16dp"
-        android:layout_centerHorizontal="true"
-        />
-
 </RelativeLayout>

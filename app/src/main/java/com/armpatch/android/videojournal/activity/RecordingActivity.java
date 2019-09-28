@@ -73,7 +73,8 @@ public class RecordingActivity extends AppCompatActivity {
             recording = new Recording();
         } else {
             recording = RecordingFactory.get(this).getRecording(uuid);
-            videoView.setVideoURI(Uri.parse(recording.getVideoPath()));
+            videoView.setVideoPath(recording.getVideoPath());
+            videoView.seekTo(1);
         }
     }
 
@@ -150,8 +151,11 @@ public class RecordingActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            videoView.setVideoPath(recording.getVideoPath());
             recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
+
+            videoView.setVideoPath(recording.getVideoPath());
+            videoView.seekTo(1);
+
         }
     }
 }
