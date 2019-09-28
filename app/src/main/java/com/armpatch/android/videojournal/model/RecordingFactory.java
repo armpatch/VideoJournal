@@ -101,6 +101,7 @@ public class RecordingFactory {
         values.put(DATE, recording.date.getTime());
         values.put(NOTES, recording.notes);
         values.put(VIDEO_PATH, recording.getVideoPath());
+        values.put(THUMBNAIL_PATH, recording.getThumbnailPath());
 
         return values;
     }

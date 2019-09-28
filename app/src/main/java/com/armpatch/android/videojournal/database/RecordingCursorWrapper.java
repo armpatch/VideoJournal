@@ -22,6 +22,7 @@ public class RecordingCursorWrapper extends CursorWrapper {
         String notes = getString(getColumnIndex(RecordingTable.Cols.NOTES));
         long date = getLong(getColumnIndex(RecordingTable.Cols.DATE));
         String videoPath = getString(getColumnIndex(RecordingTable.Cols.VIDEO_PATH));
+        String thumbnailPath = getString(getColumnIndex(RecordingTable.Cols.THUMBNAIL_PATH));
 
         Recording recording = new Recording(UUID.fromString(uuidString));
         recording.recordingTitle = recordingTitle;
@@ -29,6 +30,7 @@ public class RecordingCursorWrapper extends CursorWrapper {
         recording.notes = notes;
         recording.date = new Date(date);
         recording.setVideoPath(videoPath);
+        recording.setThumbnailPath(thumbnailPath);
 
         return recording;
     }

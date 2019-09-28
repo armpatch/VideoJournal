@@ -10,7 +10,8 @@ public class DatabaseSchema {
             public static final String SONG_TITLE = "song_title";
             public static final String DATE = "date";
             public static final String NOTES = "notes";
-            public static final String VIDEO_PATH = "path";
+            public static final String VIDEO_PATH = "video_path";
+            public static final String THUMBNAIL_PATH = "thumbnail_path";
         }
     }
 }

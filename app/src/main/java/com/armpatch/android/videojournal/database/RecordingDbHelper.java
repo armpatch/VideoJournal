@@ -24,7 +24,8 @@ public class RecordingDbHelper extends SQLiteOpenHelper {
                 RecordingTable.Cols.SONG_TITLE + ", " +
                 RecordingTable.Cols.DATE + "," +
                 RecordingTable.Cols.NOTES + ", " +
-                RecordingTable.Cols.VIDEO_PATH +
+                RecordingTable.Cols.VIDEO_PATH + "," +
+                RecordingTable.Cols.THUMBNAIL_PATH +
                 ")"
         );
     }
