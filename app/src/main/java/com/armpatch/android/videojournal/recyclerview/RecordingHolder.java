@@ -1,6 +1,9 @@
 package com.armpatch.android.videojournal.recyclerview;
 
 import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,10 +48,15 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
-                300,
-                300); // TODO dimensions shouldn't be hard coded
-        thumbnailView.setBackground(null);
-        thumbnailView.setImageBitmap(thumbnail);
+                400,
+                400); // TODO dimensions shouldn't be hard coded
+        // thumbnailView.setImageBitmap(thumbnail);
+        // thumbnailView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
+
+        dr.setCornerRadius(4);
+        thumbnailView.setImageDrawable(dr);
     }
 
     @Override
