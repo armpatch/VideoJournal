@@ -10,7 +10,6 @@ import com.armpatch.android.videojournal.PictureUtils;
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
-import com.armpatch.android.videojournal.model.ThumbnailFactory;
 
 public class RecordingHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener {
@@ -47,7 +46,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
                 300,
-                300); // TODO this needs not be hard coded
+                300); // TODO dimensions shouldn't be hard coded
         thumbnailView.setImageBitmap(thumbnail);
     }
 
