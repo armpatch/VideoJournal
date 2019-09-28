@@ -47,6 +47,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
                 recording.getThumbnailPath(),
                 300,
                 300); // TODO dimensions shouldn't be hard coded
+        thumbnailView.setBackground(null);
         thumbnailView.setImageBitmap(thumbnail);
     }
 
