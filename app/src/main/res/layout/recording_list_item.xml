@@ -46,19 +46,19 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/thumbnail_container"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="8dp"
             android:layout_toEndOf="@+id/thumbnail_container"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Created on:"
+                android:text="Created:  "
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/date"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 tools:text="10/10/2019" />
