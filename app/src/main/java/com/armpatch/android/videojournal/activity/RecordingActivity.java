@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +36,7 @@ public class RecordingActivity extends AppCompatActivity {
     VideoView videoView;
     TextView dateText;
     EditText recordingTitleText, songTitleText, notesText;
-    Button createButton, createBitmapButton;
+    Button createButton;
 
     public static Intent newIntent(Context packageContext, UUID recordingId) {
         Intent intent = new Intent(packageContext, RecordingActivity.class);
@@ -65,7 +64,6 @@ public class RecordingActivity extends AppCompatActivity {
         dateText = findViewById(R.id.date);
         notesText = findViewById(R.id.notes);
         createButton = findViewById(R.id.create_button);
-        createBitmapButton = findViewById(R.id.create_bitmap_button);
     }
 
     private void getRecording() {
@@ -90,7 +88,7 @@ public class RecordingActivity extends AppCompatActivity {
         videoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recording.getVideoPath().length() > 1) {
+                if (recording.containsVideo()) {
                     videoView.start();
                 } else {
                     dispatchRecordIntent();
@@ -104,13 +102,6 @@ public class RecordingActivity extends AppCompatActivity {
                 saveNewRecordingAndFinish();
             }
         });
-
-        createBitmapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createBitmap();
-            }
-        });
     }
 
     private void dispatchRecordIntent() {
@@ -118,8 +109,9 @@ public class RecordingActivity extends AppCompatActivity {
         Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
         File outputFile = new File(getFilesDir(), recording.getVideoFilename());
-        Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
+        recording.setVideoPath(outputFile.getAbsolutePath());
 
+        Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
 
         // grant uri permissions
@@ -128,7 +120,7 @@ public class RecordingActivity extends AppCompatActivity {
 
         for (ResolveInfo activity : cameraActivities) {
             grantUriPermission(activity.activityInfo.packageName, outputUri,
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         }
 
         // if a camera is available, start it
@@ -159,15 +151,7 @@ public class RecordingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             videoView.setVideoPath(recording.getVideoPath());
-
-            Uri resultIntentUri = intent.getData();
-            Log.v(TAG, "onActivityResult: uri = " + resultIntentUri.toString());
-            recording.setVideoPath(resultIntentUri.toString());
-            videoView.setVideoURI(resultIntentUri);
+            recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
         }
-    }
-
-    private void createBitmap() {
-        recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
     }
 }

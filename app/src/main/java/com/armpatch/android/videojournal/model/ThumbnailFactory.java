@@ -19,12 +19,6 @@ public class ThumbnailFactory {
         String videoPath = recording.getVideoPath();
 
         Bitmap bitmap;
-
-        File file = new File(videoPath);
-        if (!file.exists()) {
-            Log.e(TAG, "Thumbnail Factory: file does not exist");
-        }
-
         bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.MINI_KIND);
 
         File bitmapFile = new File(context.getFilesDir(), ImageName);
