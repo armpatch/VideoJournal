@@ -1,7 +1,5 @@
 package com.armpatch.android.videojournal.model;
 
-import android.net.Uri;
-
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,7 +13,9 @@ public class Recording {
     public String songTitle;
     public Date date;
     public String notes;
-    public String path;
+
+    private String videoPath;
+    private String thumbnailPath;
 
     public Recording() {
         this(UUID.randomUUID());
@@ -27,30 +27,42 @@ public class Recording {
         songTitle = "";
         date = new Date();
         notes = "";
-        path = "";
+        videoPath = "";
     }
 
     public String getVideoFilename() {
-        return "VIDEO_" + getId().toString() + ".mp4";
+        String id = getId().toString();
+        id = id.substring(0,15);
+        return "VIDEO_" + id + ".mp4";
+    }
+
+    public String getImageFilename() {
+        String id = getId().toString();
+        id = id.substring(0,15);
+        return "VIDEO_THUMB_" + id + ".png";
     }
 
     public boolean containsVideo() {
-        return (path.length() > 0);
+        return (videoPath.length() > 0);
     }
 
     public UUID getId() {
         return uuid;
     }
 
-    public void setPath(Uri uri) {
-        this.path = uri.toString();
+    public void setVideoPath(String path) {
+        this.videoPath = path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public String getVideoPath() {
+        return videoPath;
     }
 
-    public String getPath() {
-        return path;
+    public String getThumbnailPath() {
+        return thumbnailPath;
+    }
+
+    public void setThumbnailPath(String thumbnailPath) {
+        this.thumbnailPath = thumbnailPath;
     }
 }

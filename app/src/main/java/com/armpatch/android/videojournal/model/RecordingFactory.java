@@ -5,11 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
 import com.armpatch.android.videojournal.database.RecordingCursorWrapper;
 import com.armpatch.android.videojournal.database.RecordingDbHelper;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -67,11 +65,6 @@ public class RecordingFactory {
         }
     }
 
-    public File getVideoFile(Recording recording) {
-        File filesDir = appContext.getFilesDir();
-        return new File(filesDir, recording.getVideoFilename());
-    }
-
     public void updateRecording(Recording recording) {
         String uuidString = recording.getId().toString();
         ContentValues values = getContentValues(recording);
@@ -107,7 +100,7 @@ public class RecordingFactory {
         values.put(SONG_TITLE, recording.songTitle);
         values.put(DATE, recording.date.getTime());
         values.put(NOTES, recording.notes);
-        values.put(VIDEO_PATH, recording.getPath());
+        values.put(VIDEO_PATH, recording.getVideoPath());
 
         return values;
     }

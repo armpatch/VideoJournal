@@ -61,7 +61,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_below="@id/title_layout"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -82,39 +82,34 @@
             android:layout_below="@+id/notes_title"
             android:gravity="top|start"
             android:hint="@string/enter_notes_hint"
-            android:maxHeight="150dp"
-            android:textSize="15sp"
             android:inputType="text"
+            android:maxHeight="150dp"
             android:nextFocusDown="@id/create_button"
-            />
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:focusable="true"
+        android:text="Create" />
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/create_bitmap_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp">
-
-        <Button
-            android:id="@+id/create_button"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_alignParentEnd="true"
-            android:text="Create"
-            android:focusable="true"/>
-
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_alignParentStart="true"
-            android:text="Cancel" />
-
-    </RelativeLayout>
-
+        android:text="CreateBitmap"
+        android:layout_above="@id/create_button"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

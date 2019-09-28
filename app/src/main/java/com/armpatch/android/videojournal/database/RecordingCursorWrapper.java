@@ -28,7 +28,7 @@ public class RecordingCursorWrapper extends CursorWrapper {
         recording.songTitle = songTitle;
         recording.notes = notes;
         recording.date = new Date(date);
-        recording.setPath(videoPath);
+        recording.setVideoPath(videoPath);
 
         return recording;
     }

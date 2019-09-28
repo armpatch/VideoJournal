@@ -16,6 +16,7 @@ import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.recyclerview.RecordingHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
@@ -29,7 +30,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recording_list_activity);
-        requestPermissions();
+        checkPermissions();
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,9 +75,33 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         startActivity(RecordingActivity.newIntent(this, recording.getId()));
     }
 
-    public void requestPermissions() {
-        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_ACCESS_CODE);
+    private boolean checkPermissions() {
+        String[] permissions = new String[]{
+                Manifest.permission.INTERNET,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.VIBRATE,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.CAPTURE_VIDEO_OUTPUT,
+                Manifest.permission.CAMERA
+
+        };
+
+        int result;
+        List<String> permissionsNeeded = new ArrayList<>();
+        for (String p : permissions) {
+            result = checkSelfPermission(p);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(p);
+            }
         }
+
+        if (!permissionsNeeded.isEmpty()) {
+            requestPermissions(permissionsNeeded.toArray(new String[permissionsNeeded.size()]), 100);
+            return false;
+        }
+
+        return true;
     }
 }

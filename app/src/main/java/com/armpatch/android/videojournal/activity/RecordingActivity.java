@@ -20,6 +20,7 @@ import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
+import com.armpatch.android.videojournal.model.ThumbnailFactory;
 
 import java.io.File;
 import java.util.List;
@@ -29,15 +30,14 @@ public class RecordingActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
-    public static final String TAG = "RecordingActivityTag";
+    public static final String TAG = "TAG_LOG";
 
     Recording recording;
-    private File videoFile;
 
     VideoView videoView;
     TextView dateText;
     EditText recordingTitleText, songTitleText, notesText;
-    Button cancelButton, createButton;
+    Button createButton, createBitmapButton;
 
     public static Intent newIntent(Context packageContext, UUID recordingId) {
         Intent intent = new Intent(packageContext, RecordingActivity.class);
@@ -64,8 +64,8 @@ public class RecordingActivity extends AppCompatActivity {
         songTitleText = findViewById(R.id.song_title);
         dateText = findViewById(R.id.date);
         notesText = findViewById(R.id.notes);
-        cancelButton = findViewById(R.id.cancel_button);
         createButton = findViewById(R.id.create_button);
+        createBitmapButton = findViewById(R.id.create_bitmap_button);
     }
 
     private void getRecording() {
@@ -75,10 +75,8 @@ public class RecordingActivity extends AppCompatActivity {
             recording = new Recording();
         } else {
             recording = RecordingFactory.get(this).getRecording(uuid);
-            videoView.setVideoURI(Uri.parse(recording.getPath()));
+            videoView.setVideoURI(Uri.parse(recording.getVideoPath()));
         }
-
-        videoFile = RecordingFactory.get(this).getVideoFile(recording);
     }
 
     private void setTextFieldsFromRecording() {
@@ -92,7 +90,7 @@ public class RecordingActivity extends AppCompatActivity {
         videoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recording.getPath().length() > 1) {
+                if (recording.getVideoPath().length() > 1) {
                     videoView.start();
                 } else {
                     dispatchRecordIntent();
@@ -100,42 +98,46 @@ public class RecordingActivity extends AppCompatActivity {
             }
         });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptSaveAndClose();
+                saveNewRecordingAndFinish();
+            }
+        });
+
+        createBitmapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createBitmap();
             }
         });
     }
 
     private void dispatchRecordIntent() {
-        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        // create an intent with the output path as an extra
+        Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
-        Uri uri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", videoFile);
+        File outputFile = new File(getFilesDir(), recording.getVideoFilename());
+        Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
 
-        takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
 
+        // grant uri permissions
         List<ResolveInfo> cameraActivities = getPackageManager().
-                queryIntentActivities(takeVideoIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                queryIntentActivities(cameraIntent, PackageManager.MATCH_DEFAULT_ONLY);
 
         for (ResolveInfo activity : cameraActivities) {
-            grantUriPermission(activity.activityInfo.packageName, uri,
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            grantUriPermission(activity.activityInfo.packageName, outputUri,
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
 
-        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+        // if a camera is available, start it
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, REQUEST_VIDEO_CAPTURE);
         }
     }
 
-    private void attemptSaveAndClose() {
+    private void saveNewRecordingAndFinish() {
         if (recording.containsVideo()) {
             updateRecordingFromFields();
 
@@ -154,19 +156,18 @@ public class RecordingActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            Uri uri = intent.getData();
+            videoView.setVideoPath(recording.getVideoPath());
 
-            if (uri == null)
-                return;
-
-            videoView.setVideoURI(uri);
-            recording.setPath(uri);
-
-            String saveMessage =  "Video was saved at: " + uri.toString();
-            Log.v(TAG, saveMessage);
-
-
+            Uri resultIntentUri = intent.getData();
+            Log.v(TAG, "onActivityResult: uri = " + resultIntentUri.toString());
+            recording.setVideoPath(resultIntentUri.toString());
+            videoView.setVideoURI(resultIntentUri);
         }
+    }
+
+    private void createBitmap() {
+        recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
     }
 }
