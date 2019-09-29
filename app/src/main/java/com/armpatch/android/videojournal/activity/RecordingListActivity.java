@@ -33,7 +33,11 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         checkPermissions();
 
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL,
+                true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
