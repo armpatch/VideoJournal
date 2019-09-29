@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.VideoView;
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.TextFormatter;
+import com.armpatch.android.videojournal.util.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.model.ThumbnailFactory;

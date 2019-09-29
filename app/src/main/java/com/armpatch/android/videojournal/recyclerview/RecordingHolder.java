@@ -1,7 +1,7 @@
 package com.armpatch.android.videojournal.recyclerview;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.armpatch.android.videojournal.PictureUtils;
+import com.armpatch.android.videojournal.dialog.VideoDialog;
+import com.armpatch.android.videojournal.util.PictureUtils;
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.TextFormatter;
+import com.armpatch.android.videojournal.util.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
 
 public class RecordingHolder extends RecyclerView.ViewHolder
@@ -31,11 +32,28 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         super(view);
 
         callbacks = (Callbacks) view.getContext();
-        itemView.setOnClickListener(this);
+
+        findViewsById();
+        setListeners();
+    }
+
+    private void findViewsById() {
         recordingTitle = itemView.findViewById(R.id.recording_title);
         songTitle = itemView.findViewById(R.id.song_title);
         date = itemView.findViewById(R.id.date);
         thumbnailView = itemView.findViewById(R.id.thumbnail);
+    }
+
+    private void setListeners() {
+        itemView.setOnClickListener(this);
+
+        thumbnailView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VideoDialog dialog = new VideoDialog((Context) callbacks, recording);
+                dialog.show();
+            }
+        });
     }
 
     public void bind(Recording recording) {
@@ -49,9 +67,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
                 400,
-                400); // TODO dimensions shouldn't be hard coded
-        // thumbnailView.setImageBitmap(thumbnail);
-        // thumbnailView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                400); // TODO: dimensions probably shouldn't be hard coded here
 
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
 
