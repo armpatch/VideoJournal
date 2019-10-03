@@ -12,8 +12,8 @@ import android.view.MenuItem;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.model.Recording;
-import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
 import com.armpatch.android.videojournal.model.RecordingFactory;
+import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
 import com.armpatch.android.videojournal.recyclerview.RecordingHolder;
 
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
     @Override
     public void onRecordingSelected(Recording recording) {
-        startActivity(RecordingActivity.newIntent(this, recording.getId()));
+        //startActivity(RecordingActivity.newIntent(this, recording.getId()));
     }
 
     private boolean checkPermissions() {

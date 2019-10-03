@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.VideoView;
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.util.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.model.ThumbnailFactory;
@@ -28,7 +27,6 @@ import java.util.UUID;
 public class RecordingActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
-
     public static final String TAG = "TAG_LOG";
 
     Recording recording;
@@ -49,64 +47,17 @@ public class RecordingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        takeVideo();
 
         setContentView(R.layout.recording_activity);
         findViewsById();
-        getRecording();
-        setTextFieldsFromRecording();
         setListeners();
-    }
-
-    private void findViewsById() {
-        videoView = findViewById(R.id.videoView);
-        recordingTitleText = findViewById(R.id.recording_title);
-        songTitleText = findViewById(R.id.song_title);
-        dateText = findViewById(R.id.date);
-        notesText = findViewById(R.id.notes);
-        createButton = findViewById(R.id.create_button);
-    }
-
-    private void getRecording() {
-        UUID uuid = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
-
-        if (uuid == null) {
-            recording = new Recording();
-        } else {
-            recording = RecordingFactory.get(this).getRecording(uuid);
-            videoView.setVideoPath(recording.getVideoPath());
-            videoView.seekTo(1);
-        }
-    }
-
-    private void setTextFieldsFromRecording() {
-        recordingTitleText.setText(recording.recordingTitle);
-        songTitleText.setText(recording.songTitle);
-        dateText.setText(TextFormatter.getSimpleDateString(recording.date));
-        notesText.setText(recording.notes);
-    }
-
-    private void setListeners() {
-        videoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (recording.containsVideo()) {
-                    videoView.start();
-                } else {
-                    takeVideo();
-                }
-            }
-        });
-
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveNewRecording();
-            }
-        });
     }
 
     private void takeVideo() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+
+        recording = new Recording();
 
         File outputFile = new File(getFilesDir(), recording.getVideoFilename());
         recording.setVideoPath(outputFile.getAbsolutePath());
@@ -130,15 +81,38 @@ public class RecordingActivity extends AppCompatActivity {
         }
     }
 
-    private void saveNewRecording() {
-        if (recording.containsVideo()) {
-            updateRecordingFromFields();
+    private void findViewsById() {
+        videoView = findViewById(R.id.videoView);
+        recordingTitleText = findViewById(R.id.recording_title);
+        songTitleText = findViewById(R.id.song_title);
+        dateText = findViewById(R.id.date);
+        notesText = findViewById(R.id.notes);
+        createButton = findViewById(R.id.create_button);
+    }
 
-            RecordingFactory.get(this).addRecording(recording);
-            finish();
-        } else {
-            // TODO alert the user
-        }
+    private void setListeners() {
+        videoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if (recording.containsVideo()) {
+                videoView.start();
+            }
+            }
+        });
+
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveAndFinishActivity();
+            }
+        });
+    }
+
+    private void saveAndFinishActivity() {
+        updateRecordingFromFields();
+
+        RecordingFactory.get(this).addRecording(recording);
+        finish();
     }
 
     private void updateRecordingFromFields() {
@@ -155,7 +129,10 @@ public class RecordingActivity extends AppCompatActivity {
 
             videoView.setVideoPath(recording.getVideoPath());
             videoView.seekTo(1);
+        }
 
+        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode != RESULT_OK) {
+            finish();
         }
     }
 
