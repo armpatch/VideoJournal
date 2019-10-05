@@ -5,9 +5,14 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="play_icon">#FFFFFF</color>
-    <color name="list_activity_background">#888888</color>
-    <color name="cardview_background">#9C66BB6A</color>
+    <color name="list_activity_background">#11154B</color>
 
     <color name="list_item_text">#FFFFFF</color>
+
+
+    <color name="status_bar_background">#000000</color>
+    <color name="action_bar_background">#242424</color>
+    <color name="action_bar_text">#FFFFFF</color>
+
 
 </resources>

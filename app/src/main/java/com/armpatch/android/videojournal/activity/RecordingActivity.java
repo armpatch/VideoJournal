@@ -33,7 +33,7 @@ public class RecordingActivity extends AppCompatActivity {
 
     VideoView videoView;
     TextView dateText;
-    EditText recordingTitleText, songTitleText, notesText;
+    EditText recordingTitleText, notesText;
     Button createButton;
 
     public static Intent newIntent(Context packageContext, UUID recordingId) {
@@ -84,7 +84,6 @@ public class RecordingActivity extends AppCompatActivity {
     private void findViewsById() {
         videoView = findViewById(R.id.videoView);
         recordingTitleText = findViewById(R.id.recording_title);
-        songTitleText = findViewById(R.id.song_title);
         dateText = findViewById(R.id.date);
         notesText = findViewById(R.id.notes);
         createButton = findViewById(R.id.create_button);
@@ -117,7 +116,6 @@ public class RecordingActivity extends AppCompatActivity {
 
     private void updateRecordingFromFields() {
         recording.recordingTitle = recordingTitleText.getText().toString();
-        recording.songTitle = songTitleText.getText().toString();
         recording.notes = notesText.getText().toString();
     }
 

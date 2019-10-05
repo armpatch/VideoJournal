@@ -97,7 +97,6 @@ public class RecordingFactory {
         ContentValues values = new ContentValues();
         values.put(RECORDING_UUID, recording.getId().toString());
         values.put(RECORDING_TITLE, recording.recordingTitle);
-        values.put(SONG_TITLE, recording.songTitle);
         values.put(DATE, recording.date.getTime());
         values.put(NOTES, recording.notes);
         values.put(VIDEO_PATH, recording.getVideoPath());

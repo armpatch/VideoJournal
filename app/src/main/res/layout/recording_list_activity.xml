@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/brown_wooden_floor"
-        android:scaleType="fitXY">
-    </ImageView>
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/list_activity_background"
+        >
     </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

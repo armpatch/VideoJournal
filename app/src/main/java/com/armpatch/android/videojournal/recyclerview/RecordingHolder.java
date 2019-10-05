@@ -25,10 +25,10 @@ public class RecordingHolder extends RecyclerView.ViewHolder
     private Callbacks callbacks;
     private Recording recording;
 
-    private TextView recordingTitle, songTitle, date;
+    private TextView recordingTitle, date;
     private ImageView thumbnailView;
 
-    public RecordingHolder(View view) {
+    RecordingHolder(View view) {
         super(view);
 
         callbacks = (Callbacks) view.getContext();
@@ -39,7 +39,6 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     private void findViewsById() {
         recordingTitle = itemView.findViewById(R.id.recording_title);
-        songTitle = itemView.findViewById(R.id.song_title);
         date = itemView.findViewById(R.id.date);
         thumbnailView = itemView.findViewById(R.id.thumbnail);
     }
@@ -56,10 +55,9 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         });
     }
 
-    public void bind(Recording recording) {
+    void bind(Recording recording) {
         this.recording = recording;
         recordingTitle.setText(recording.recordingTitle);
-        songTitle.setText(recording.songTitle);
 
         String dateString = TextFormatter.getSimpleDateString(recording.date);
         date.setText(dateString);

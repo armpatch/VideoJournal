@@ -6,10 +6,29 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/status_bar_background</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
-    <style name="TextColor">
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/action_bar_background</item>
+        <item name="titleTextStyle">@style/MyActionBarTitle</item>
+    </style>
+
+    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/action_bar_text</item>
+    </style>
+
+
+    <style name="ListTitle">
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+    <style name="ListDetail">
+        <item name="android:textColor">#CECECE</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

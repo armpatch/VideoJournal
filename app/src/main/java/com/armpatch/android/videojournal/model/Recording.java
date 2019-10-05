@@ -10,7 +10,6 @@ public class Recording {
     private UUID uuid;
 
     public String recordingTitle;
-    public String songTitle;
     public Date date;
     public String notes;
 
@@ -24,7 +23,6 @@ public class Recording {
     public Recording(UUID uuid) {
         this.uuid = uuid;
         recordingTitle = "";
-        songTitle = "";
         date = new Date();
         notes = "";
         videoPath = "";
@@ -36,7 +34,7 @@ public class Recording {
         return "VIDEO_" + id + ".mp4";
     }
 
-    public String getImageFilename() {
+    String getImageFilename() {
         String id = getId().toString();
         id = id.substring(0,15);
         return "VIDEO_THUMB_" + id + ".png";

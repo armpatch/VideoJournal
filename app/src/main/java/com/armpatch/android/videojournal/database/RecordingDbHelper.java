@@ -21,7 +21,6 @@ public class RecordingDbHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 RecordingTable.Cols.RECORDING_UUID + ", " +
                 RecordingTable.Cols.RECORDING_TITLE + ", " +
-                RecordingTable.Cols.SONG_TITLE + ", " +
                 RecordingTable.Cols.DATE + "," +
                 RecordingTable.Cols.NOTES + ", " +
                 RecordingTable.Cols.VIDEO_PATH + "," +
