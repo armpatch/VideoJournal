@@ -68,7 +68,14 @@ public class RecordingEditorDialog extends Dialog {
     }
 
     private void saveRecording() {
-        recording.title = recordingTitleText.getText().toString();
+        String titleUserEntered = recordingTitleText.getText().toString();
+
+        if (titleUserEntered.isEmpty()) {
+            recording.title = "New Recording";
+        } else {
+            recording.title = titleUserEntered;
+        }
+
         recording.notes = notesText.getText().toString();
 
         RecordingFactory.get(activityContext).addRecording(recording);
