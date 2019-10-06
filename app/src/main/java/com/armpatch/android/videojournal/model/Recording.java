@@ -9,7 +9,7 @@ public class Recording {
 
     private UUID uuid;
 
-    public String recordingTitle;
+    public String title;
     public Date date;
     public String notes;
 
@@ -22,7 +22,7 @@ public class Recording {
 
     public Recording(UUID uuid) {
         this.uuid = uuid;
-        recordingTitle = "";
+        title = "";
         date = new Date();
         notes = "";
         videoPath = "";

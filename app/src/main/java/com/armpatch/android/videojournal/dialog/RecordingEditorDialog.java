@@ -17,7 +17,7 @@ import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.model.ThumbnailFactory;
 import com.armpatch.android.videojournal.util.PictureUtils;
 
-public class RecordingDialog extends Dialog {
+public class RecordingEditorDialog extends Dialog {
 
     private Context activityContext;
     private Recording recording;
@@ -25,7 +25,7 @@ public class RecordingDialog extends Dialog {
     private EditText recordingTitleText, notesText;
 
 
-    public RecordingDialog( Context activityContext, Recording recording) {
+    public RecordingEditorDialog(Context activityContext, Recording recording) {
         super(activityContext);
         this.activityContext = activityContext;
         this.recording = recording;
@@ -35,7 +35,7 @@ public class RecordingDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.recording_dialog);
+        setContentView(R.layout.recording_editor_dialog);
 
         //create Thumbnail
         recording.setThumbnailPath(ThumbnailFactory.createThumbnail(activityContext, recording));
@@ -68,7 +68,7 @@ public class RecordingDialog extends Dialog {
     }
 
     private void saveRecording() {
-        recording.recordingTitle = recordingTitleText.getText().toString();
+        recording.title = recordingTitleText.getText().toString();
         recording.notes = notesText.getText().toString();
 
         RecordingFactory.get(activityContext).addRecording(recording);

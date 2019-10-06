@@ -17,7 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.dialog.RecordingDialog;
+import com.armpatch.android.videojournal.dialog.RecordingEditorDialog;
+import com.armpatch.android.videojournal.dialog.RecordingViewerDialog;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
@@ -86,7 +87,8 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
     @Override
     public void onRecordingSelected(Recording recording) {
-        // TODO show existing
+        RecordingViewerDialog dialog = new RecordingViewerDialog(this, recording);
+        dialog.show();
     }
 
     private void checkPermissions() {
@@ -144,7 +146,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            RecordingDialog dialog = new RecordingDialog(this, tempRecording);
+            RecordingEditorDialog dialog = new RecordingEditorDialog(this, tempRecording);
             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {

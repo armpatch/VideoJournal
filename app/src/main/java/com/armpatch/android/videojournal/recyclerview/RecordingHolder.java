@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.armpatch.android.videojournal.dialog.VideoDialog;
 import com.armpatch.android.videojournal.util.PictureUtils;
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.util.TextFormatter;
@@ -45,19 +44,11 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     private void setListeners() {
         itemView.setOnClickListener(this);
-
-        thumbnailView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VideoDialog dialog = new VideoDialog((Context) callbacks, recording);
-                dialog.show();
-            }
-        });
     }
 
     void bind(Recording recording) {
         this.recording = recording;
-        recordingTitle.setText(recording.recordingTitle);
+        recordingTitle.setText(recording.title);
 
         String dateString = TextFormatter.getSimpleDateString(recording.date);
         date.setText(dateString);

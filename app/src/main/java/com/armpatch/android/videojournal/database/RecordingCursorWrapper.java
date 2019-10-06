@@ -24,7 +24,7 @@ public class RecordingCursorWrapper extends CursorWrapper {
         String thumbnailPath = getString(getColumnIndex(RecordingTable.Cols.THUMBNAIL_PATH));
 
         Recording recording = new Recording(UUID.fromString(uuidString));
-        recording.recordingTitle = recordingTitle;
+        recording.title = recordingTitle;
         recording.notes = notes;
         recording.date = new Date(date);
         recording.setVideoPath(videoPath);
