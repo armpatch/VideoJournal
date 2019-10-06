@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/videoview_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:gravity="center"
         >
@@ -36,31 +36,23 @@
         <EditText
             android:id="@+id/recording_title"
             style="@android:style/Widget.TextView"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
-            android:gravity="bottom"
-            android:hint="@string/recording_title_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-
-
-
-        <TextView
-            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            tools:text="10/10/2019" />
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:hint="@string/recording_title_hint"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_margin="8dp"/>
+
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/notes_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_below="@id/title_layout"
@@ -92,11 +84,11 @@
 
     <Button
         android:id="@+id/create_button"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_below="@id/notes_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         android:focusable="true"
         android:text="@string/create_button" />

@@ -26,7 +26,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingHolder> {
     @Override
     public RecordingHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(activityContext)
-                .inflate(R.layout.recording_list_item, viewGroup, false);
+                .inflate(R.layout.recording_list_grid_item, viewGroup, false);
 
         return new RecordingHolder(view);
     }

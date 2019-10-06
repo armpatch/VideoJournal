@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -33,11 +34,15 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         checkPermissions();
 
         recyclerView = findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this,
+
+        /*LinearLayoutManager linearLayoutManager= new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL,
                 true);
-        layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
+        linearLayoutManager.setStackFromEnd(true);*/
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     @Override

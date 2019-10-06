@@ -49,7 +49,7 @@ public class RecordingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         takeVideo();
 
-        setContentView(R.layout.recording_activity);
+        setContentView(R.layout.recording_dialog);
         findViewsById();
         setListeners();
     }
