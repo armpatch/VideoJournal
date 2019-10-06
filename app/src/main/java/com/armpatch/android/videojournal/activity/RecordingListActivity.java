@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +20,6 @@ import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.dialog.RecordingDialog;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
-import com.armpatch.android.videojournal.model.ThumbnailFactory;
 import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
 import com.armpatch.android.videojournal.recyclerview.RecordingHolder;
 
@@ -37,7 +35,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     RecyclerView recyclerView;
     private RecordingAdapter recordingAdapter;
 
-    Recording recordingSlate;
+    Recording tempRecording;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,7 +86,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
     @Override
     public void onRecordingSelected(Recording recording) {
-        //startActivity(RecordingActivity.newIntent(this, recording.getId()));
+        // TODO show existing
     }
 
     private void checkPermissions() {
@@ -119,15 +117,12 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     }
 
     private void takeVideo() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-
-        recordingSlate = new Recording();
-
-        File outputFile = new File(getFilesDir(), recordingSlate.getVideoFilename());
-        recordingSlate.setVideoPath(outputFile.getAbsolutePath());
+        tempRecording = new Recording();
+        File outputFile = new File(getFilesDir(), tempRecording.getVideoFilename());
+        tempRecording.setVideoPath(outputFile.getAbsolutePath());
 
         Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
-
+        Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
 
         // grant uri permissions
@@ -149,16 +144,14 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-
-
-            RecordingDialog dialog = new RecordingDialog(this, recordingSlate);
-            dialog.show();
+            RecordingDialog dialog = new RecordingDialog(this, tempRecording);
             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
                     updateRecyclerView();
                 }
             });
+            dialog.show();
         }
     }
 }
