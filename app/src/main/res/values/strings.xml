@@ -2,7 +2,7 @@
     <string name="app_name">VideoJournal</string>
     <string name="menu_title">title</string>
     <string name="notes_title">Notes:</string>
-    <string name="recording_title_hint">Recording Title</string>
+    <string name="recording_title_hint">Enter Title</string>
     <string name="song_title_hint">Song Title</string>
     <string name="enter_notes_hint">Enter Notes</string>
     <string name="create_button">Create</string>

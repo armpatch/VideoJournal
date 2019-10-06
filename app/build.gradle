@@ -26,5 +26,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation group: 'com.android.support', name: 'recyclerview-v7', version: '28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
 
 }

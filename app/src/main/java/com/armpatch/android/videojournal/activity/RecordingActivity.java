@@ -36,8 +36,8 @@ public class RecordingActivity extends AppCompatActivity {
     EditText recordingTitleText, notesText;
     Button createButton;
 
-    public static Intent newIntent(Context packageContext, UUID recordingId) {
-        Intent intent = new Intent(packageContext, RecordingActivity.class);
+    public static Intent newIntent(Context activityContext, UUID recordingId) {
+        Intent intent = new Intent(activityContext, RecordingActivity.class);
         Bundle extras = new Bundle();
         extras.putSerializable(Recording.EXTRA_KEY, recordingId);
         intent.putExtras(extras);
@@ -82,7 +82,6 @@ public class RecordingActivity extends AppCompatActivity {
     }
 
     private void findViewsById() {
-        videoView = findViewById(R.id.videoView);
         recordingTitleText = findViewById(R.id.recording_title);
         dateText = findViewById(R.id.date);
         notesText = findViewById(R.id.notes);
@@ -108,15 +107,11 @@ public class RecordingActivity extends AppCompatActivity {
     }
 
     private void saveAndFinishActivity() {
-        updateRecordingFromFields();
+        recording.recordingTitle = recordingTitleText.getText().toString();
+        recording.notes = notesText.getText().toString();
 
         RecordingFactory.get(this).addRecording(recording);
         finish();
-    }
-
-    private void updateRecordingFromFields() {
-        recording.recordingTitle = recordingTitleText.getText().toString();
-        recording.notes = notesText.getText().toString();
     }
 
     @Override

@@ -11,8 +11,8 @@ import com.armpatch.android.videojournal.model.Recording;
 
 public class VideoDialog {
 
-    VideoView videoView;
-    Dialog dialog;
+    private VideoView videoView;
+    private Dialog dialog;
 
     public VideoDialog(Context activityContext, Recording recording) {
 

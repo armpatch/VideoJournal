@@ -1,9 +1,15 @@
 package com.armpatch.android.videojournal.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,20 +18,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.armpatch.android.videojournal.R;
+import com.armpatch.android.videojournal.dialog.RecordingDialog;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
+import com.armpatch.android.videojournal.model.ThumbnailFactory;
 import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
 import com.armpatch.android.videojournal.recyclerview.RecordingHolder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
 
     private static final int REQUEST_WRITE_ACCESS_CODE = 1;
+    private static final int REQUEST_VIDEO_CAPTURE = 1;
 
     RecyclerView recyclerView;
     private RecordingAdapter recordingAdapter;
+
+    Recording recordingSlate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,11 +46,6 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         checkPermissions();
 
         recyclerView = findViewById(R.id.recycler_view);
-
-        /*LinearLayoutManager linearLayoutManager= new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL,
-                true);
-        linearLayoutManager.setStackFromEnd(true);*/
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
 
@@ -73,7 +80,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_new_recording) {
-            startActivity(RecordingActivity.newIntent(this, null));
+            takeVideo();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -84,7 +91,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         //startActivity(RecordingActivity.newIntent(this, recording.getId()));
     }
 
-    private boolean checkPermissions() {
+    private void checkPermissions() {
         String[] permissions = new String[]{
                 Manifest.permission.INTERNET,
                 Manifest.permission.READ_PHONE_STATE,
@@ -108,9 +115,50 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
         if (!permissionsNeeded.isEmpty()) {
             requestPermissions(permissionsNeeded.toArray(new String[permissionsNeeded.size()]), 100);
-            return false;
+        }
+    }
+
+    private void takeVideo() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+
+        recordingSlate = new Recording();
+
+        File outputFile = new File(getFilesDir(), recordingSlate.getVideoFilename());
+        recordingSlate.setVideoPath(outputFile.getAbsolutePath());
+
+        Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
+
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+
+        // grant uri permissions
+        List<ResolveInfo> cameraActivities = getPackageManager().
+                queryIntentActivities(cameraIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        for (ResolveInfo activity : cameraActivities) {
+            grantUriPermission(activity.activityInfo.packageName, outputUri,
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         }
 
-        return true;
+        // if a camera is available, start it
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, REQUEST_VIDEO_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+
+
+            RecordingDialog dialog = new RecordingDialog(this, recordingSlate);
+            dialog.show();
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    updateRecyclerView();
+                }
+            });
+        }
     }
 }
