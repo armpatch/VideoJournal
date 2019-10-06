@@ -118,11 +118,6 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     }
 
     private void takeVideo() {
-        tempRecording = new Recording();
-        File outputFile = new File(getFilesDir(), tempRecording.getVideoFilename());
-        tempRecording.setVideoPath(outputFile.getAbsolutePath());
-
-        Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
         Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
         recordingSlate = new Recording();
@@ -153,14 +148,15 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            RecordingEditorDialog dialog = new RecordingEditorDialog(this, tempRecording);
+
+            RecordingEditorDialog dialog = new RecordingEditorDialog(this, recordingSlate);
+            dialog.show();
             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
                     updateRecyclerView();
                 }
             });
-            dialog.show();
         }
     }
 }
