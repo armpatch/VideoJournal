@@ -21,13 +21,13 @@
 
 
     <style name="ListTitle">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/list_item_text_dark</item>
         <item name="android:textSize">16sp</item>
     </style>
 
 
     <style name="ListDetail">
-        <item name="android:textColor">#CECECE</item>
+        <item name="android:textColor">@color/list_item_text_dark</item>
         <item name="android:textSize">14sp</item>
     </style>
 

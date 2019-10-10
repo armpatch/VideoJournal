@@ -6,9 +6,11 @@
 
     <color name="play_icon">#FFFFFF</color>
     <color name="list_activity_background">#001D0B</color>
+    <color name="list_activity_background_light">#797979</color>
+    <color name="dialog_background">#BFCAFF</color>
 
-    <color name="list_item_text">#FFFFFF</color>
-
+    <color name="list_item_text_light">#8D8D8D</color>
+    <color name="list_item_text_dark">#000000</color>
 
     <color name="status_bar_background">#000000</color>
     <color name="action_bar_background">#242424</color>
