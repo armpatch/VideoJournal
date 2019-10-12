@@ -3,16 +3,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/list_recycler_background"
-        android:elevation="4dp"
-        android:layout_margin="8dp">
+        android:background="@color/list_recycler_background">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -27,7 +24,6 @@
         android:focusable="true"
         android:layout_margin="16dp"
 
-        app:elevation="6dp"
         app:fabSize="normal"
         app:pressedTranslationZ="12dp"
         app:rippleColor="@android:color/black" />

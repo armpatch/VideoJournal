@@ -6,18 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
 
     </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="background">@color/action_bar_background</item>
-        <item name="titleTextStyle">@style/MyActionBarTitle</item>
+        <item name="elevation">4dp</item>
     </style>
-
-    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/action_bar_text</item>
-    </style>
-
 
     <style name="ListTitle">
         <item name="android:textColor">@color/list_item_text_dark</item>

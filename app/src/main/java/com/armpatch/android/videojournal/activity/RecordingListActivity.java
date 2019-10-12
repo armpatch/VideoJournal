@@ -9,12 +9,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.dialog.RecordingEditorDialog;
@@ -33,6 +36,8 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     private static final int REQUEST_VIDEO_CAPTURE = 1;
 
     RecyclerView recyclerView;
+    FloatingActionButton fab;
+
     private RecordingAdapter recordingAdapter;
 
     Recording recordingSlate;
@@ -41,13 +46,20 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recording_list_activity);
+
         checkPermissions();
 
         recyclerView = findViewById(R.id.recycler_view);
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeVideo();
+            }
+        });
     }
 
     @Override
@@ -67,21 +79,6 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
             recordingAdapter.setRecordings(recordings);
             recordingAdapter.notifyDataSetChanged();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.recording_list_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_new_recording) {
-            takeVideo();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
