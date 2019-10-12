@@ -30,7 +30,6 @@ import java.util.List;
 
 public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
 
-    private static final int REQUEST_WRITE_ACCESS_CODE = 1;
     private static final int REQUEST_VIDEO_CAPTURE = 1;
 
     RecyclerView recyclerView;
@@ -125,6 +124,14 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
         Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
         Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+
+        recordingSlate = new Recording();
+
+        File outputFile = new File(getFilesDir(), recordingSlate.getVideoFilename());
+        recordingSlate.setVideoPath(outputFile.getAbsolutePath());
+
+        Uri outputUri = FileProvider.getUriForFile(this, "com.armpatch.android.videojournal.fileprovider", outputFile);
+
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
 
         // grant uri permissions
