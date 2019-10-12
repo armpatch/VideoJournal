@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.RecordingEditorActivity" />
+
         <provider
             android:authorities="com.armpatch.android.videojournal.fileprovider"
             android:name="android.support.v4.content.FileProvider"
