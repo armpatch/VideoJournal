@@ -35,7 +35,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     RecyclerView recyclerView;
     private RecordingAdapter recordingAdapter;
 
-    Recording tempRecording;
+    Recording recordingSlate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
