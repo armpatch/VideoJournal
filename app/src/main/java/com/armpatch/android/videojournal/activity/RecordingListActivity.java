@@ -98,8 +98,8 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
     @Override
     public void onRecordingSelected(Recording recording) {
-        RecordingViewerDialog dialog = new RecordingViewerDialog(this, recording);
-        dialog.show();
+        Intent intent = RecordingViewerActivity.getIntent(this, recording.getId());
+        startActivity(intent);
     }
 
 }
