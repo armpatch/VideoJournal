@@ -33,7 +33,7 @@ public class TextFormatter {
 
     public static String getSimpleDateString(Date date) {
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yy  h:mm aa ");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM yyyy");
         return dateFormatter.format(date);
     }
 
