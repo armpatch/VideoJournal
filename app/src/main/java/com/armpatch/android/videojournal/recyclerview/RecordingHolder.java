@@ -1,11 +1,11 @@
 package com.armpatch.android.videojournal.recyclerview;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,13 +46,18 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         itemView.setOnClickListener(this);
     }
 
-    void bind(Recording recording) {
+    void bind(Recording recording, int position) {
         this.recording = recording;
         recordingTitle.setText(recording.title);
 
         String dateString = TextFormatter.getSimpleDateString(recording.date);
         date.setText(dateString);
 
+        setThumbnail(recording);
+        setViewMargin(position);
+    }
+
+    private void setThumbnail(Recording recording) {
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
                 400,
@@ -62,6 +67,20 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
         dr.setCornerRadius(4);
         thumbnailView.setImageDrawable(dr);
+    }
+
+    private void setViewMargin(int position) {
+        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(itemView.getLayoutParams());
+
+        int margin = 6;
+
+        if (position % 2 == 0) {
+            marginLayoutParams.setMargins(0,0,margin,margin * 2);
+        } else {
+            marginLayoutParams.setMargins(margin,0,0,margin * 2);
+        }
+
+        itemView.setLayoutParams(marginLayoutParams);
     }
 
     @Override

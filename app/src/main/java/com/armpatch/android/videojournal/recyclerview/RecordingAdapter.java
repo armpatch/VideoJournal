@@ -33,7 +33,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecordingHolder holder, int position) {
-        holder.bind(recordings.get(position));
+        holder.bind(recordings.get(position), position);
     }
 
     @Override

@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/list_recycler_background"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
 
         tools:layoutManager="android.support.v7.widget.GridLayoutManager"
         tools:listitem="@layout/recording_list_grid_item"

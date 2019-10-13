@@ -20,8 +20,6 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1" />
 
-
-
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
@@ -29,16 +27,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:rotation="180"
+            android:src="@drawable/scrim"
+            android:layout_gravity="bottom"
+            />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"/>
+            android:layout_weight="4"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
-            android:src="@drawable/scrim_40_percent"
+            android:layout_weight="3"
+            android:src="@drawable/scrim"
             android:layout_gravity="bottom"
             />
 
@@ -50,25 +57,31 @@
         android:orientation="vertical"
         android:layout_gravity="bottom|center_horizontal">
 
-        <TextView
-            android:id="@+id/recording_title"
-            style="@style/ListTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:maxLines="1"
-            tools:text="Beast and the Harlot"
-            />
-
-        <TextView
-            android:id="@+id/date"
-            style="@style/ListDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            tools:text="10/10/2019" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/recording_title"
+        style="@style/ListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:maxLines="1"
+        tools:text="Beast and the Harlot"
+
+        />
+
+    <TextView
+        android:id="@+id/date"
+        style="@style/ListDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_gravity="top"
+        android:layout_margin="4dp"
+        tools:text="10/10/2019" />
 
 
 </FrameLayout>
