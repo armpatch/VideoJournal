@@ -8,10 +8,12 @@
     <color name="list_recycler_background">#FFFFFF</color>
     <color name="dialog_background">#BFCAFF</color>
 
-    <color name="list_item_text_dark">#000000</color>
+    <color name="list_item_text">#FFFFFF</color>
 
     <color name="status_bar_background">#000000</color>
     <color name="action_bar_background">#242424</color>
     <color name="action_bar_text">#FFFFFF</color>
+    <color name="scrim_dark">#99000000</color>
+
 
 </resources>

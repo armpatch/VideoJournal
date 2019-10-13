@@ -65,8 +65,8 @@ public class RecordingEditorActivity extends AppCompatActivity {
     private void setThumbnail() {
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
-                400,
-                400); // TODO: dimensions probably shouldn't be hard coded here
+                800,
+                800); // TODO: dimensions should not be hard coded here
 
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
 
