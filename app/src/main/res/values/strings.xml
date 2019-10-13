@@ -6,4 +6,7 @@
     <string name="song_title_hint">Song Title</string>
     <string name="enter_notes_hint">Enter Notes</string>
     <string name="create_button">Create</string>
+
+    <string name="transition_photo">Transition Photo</string>
+    <string name="transition_title">Transition Title</string>
 </resources>

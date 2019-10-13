@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dialog_background"
+    android:background="@android:color/black"
     android:orientation="vertical">
 
 
@@ -11,19 +11,36 @@
         android:id="@+id/videoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:transitionName="@string/transition_photo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:src="@drawable/scrim" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/recording_title"
-        style="@android:style/Widget.TextView"
+        style="@style/ListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="8dp"
         android:maxLines="1"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        tools:text="Recording Name"
-        android:layout_gravity="bottom|center_horizontal"/>
-
+        android:transitionName="@string/transition_title"
+        tools:text="Recording Name" />
 
 </FrameLayout>

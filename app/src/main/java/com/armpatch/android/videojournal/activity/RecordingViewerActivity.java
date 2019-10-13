@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class RecordingViewerActivity extends AppCompatActivity {
 
-    private TextView title, notes;
+    private TextView title;
     private VideoView videoView;
 
     private Recording recording;

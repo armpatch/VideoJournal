@@ -1,6 +1,7 @@
 package com.armpatch.android.videojournal.activity;
 
 import android.Manifest;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,10 +10,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.View;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.dialog.RecordingViewerDialog;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
@@ -97,9 +98,21 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     }
 
     @Override
-    public void onRecordingSelected(Recording recording) {
+    public void onRecordingSelected(Recording recording, RecordingHolder holder) {
         Intent intent = RecordingViewerActivity.getIntent(this, recording.getId());
-        startActivity(intent);
+
+        Pair<View, String> imagePair = new Pair<View, String>(holder.thumbnailView, holder.thumbnailView.getTransitionName());
+        Pair<View, String> titlePair = new Pair<View, String>(holder.recordingTitle, holder.recordingTitle.getTransitionName());
+
+
+        Bundle bundle = ActivityOptions
+                .makeSceneTransitionAnimation(
+                        this,
+                        imagePair,
+                        titlePair)
+                .toBundle();
+
+        startActivity(intent, bundle);
     }
 
 }

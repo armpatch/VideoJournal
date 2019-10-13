@@ -18,14 +18,14 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener {
 
     public interface Callbacks {
-        void onRecordingSelected(Recording recording);
+        void onRecordingSelected(Recording recording, RecordingHolder holder);
     }
 
     private Callbacks callbacks;
     private Recording recording;
 
-    private TextView recordingTitle, date;
-    private ImageView thumbnailView;
+    public TextView recordingTitle, date;
+    public ImageView thumbnailView;
 
     RecordingHolder(View view) {
         super(view);
@@ -85,6 +85,6 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onClick(View v) {
-        callbacks.onRecordingSelected(recording);
+        callbacks.onRecordingSelected(recording, this);
     }
 }
