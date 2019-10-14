@@ -24,8 +24,9 @@ public class RecordingHolder extends RecyclerView.ViewHolder
     private Callbacks callbacks;
     private Recording recording;
 
-    public TextView recordingTitle, date;
-    public ImageView thumbnailView;
+    public TextView title, date;
+    public ImageView thumbnail;
+    public ImageView scrimTop, scrimBottom;
 
     RecordingHolder(View view) {
         super(view);
@@ -37,9 +38,11 @@ public class RecordingHolder extends RecyclerView.ViewHolder
     }
 
     private void findViewsById() {
-        recordingTitle = itemView.findViewById(R.id.recording_title);
+        title = itemView.findViewById(R.id.recording_title);
         date = itemView.findViewById(R.id.date);
-        thumbnailView = itemView.findViewById(R.id.thumbnail);
+        thumbnail = itemView.findViewById(R.id.thumbnail);
+        scrimTop = itemView.findViewById(R.id.grid_scrim_top);
+        scrimBottom = itemView.findViewById(R.id.grid_scrim_bottom);
     }
 
     private void setListeners() {
@@ -48,7 +51,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     void bind(Recording recording, int position) {
         this.recording = recording;
-        recordingTitle.setText(recording.title);
+        title.setText(recording.title);
 
         String dateString = TextFormatter.getSimpleDateString(recording.date);
         date.setText(dateString);
@@ -63,10 +66,10 @@ public class RecordingHolder extends RecyclerView.ViewHolder
                 400,
                 400); // TODO: dimensions probably shouldn't be hard coded here
 
-        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(this.thumbnail.getResources(), thumbnail);
 
         dr.setCornerRadius(4);
-        thumbnailView.setImageDrawable(dr);
+        this.thumbnail.setImageDrawable(dr);
     }
 
     private void setViewMargin(int position) {

@@ -5,7 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="play_icon">#FFFFFF</color>
-    <color name="list_recycler_background">#FFFFFF</color>
+    <color name="list_recycler_background">#505050</color>
     <color name="dialog_background">#BFCAFF</color>
 
     <color name="list_item_text">#FFFFFF</color>

@@ -101,15 +101,23 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     public void onRecordingSelected(Recording recording, RecordingHolder holder) {
         Intent intent = RecordingViewerActivity.getIntent(this, recording.getId());
 
-        Pair<View, String> imagePair = new Pair<View, String>(holder.thumbnailView, holder.thumbnailView.getTransitionName());
-        Pair<View, String> titlePair = new Pair<View, String>(holder.recordingTitle, holder.recordingTitle.getTransitionName());
+        // set shared element transition pairs
+        Pair<View, String> imagePair = new Pair<View, String>(holder.thumbnail, holder.thumbnail.getTransitionName());
+        Pair<View, String> titlePair = new Pair<View, String>(holder.title, holder.title.getTransitionName());
+        Pair<View, String> datePair = new Pair<View, String>(holder.date, holder.date.getTransitionName());
+        Pair<View, String> scrimTopPair = new Pair<View, String>(holder.scrimTop, holder.scrimTop.getTransitionName());
+        Pair<View, String> scrimBottomPair = new Pair<View, String>(holder.scrimBottom, holder.scrimBottom.getTransitionName());
 
 
         Bundle bundle = ActivityOptions
                 .makeSceneTransitionAnimation(
                         this,
                         imagePair,
-                        titlePair)
+                        titlePair,
+                        datePair,
+                        scrimTopPair,
+                        scrimBottomPair
+                        )
                 .toBundle();
 
         startActivity(intent, bundle);

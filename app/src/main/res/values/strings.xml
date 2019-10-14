@@ -9,4 +9,8 @@
 
     <string name="transition_photo">Transition Photo</string>
     <string name="transition_title">Transition Title</string>
+    <string name="transition_date">Transition Date</string>
+    <string name="transition_scrim_top">Transition Scrim Top</string>
+    <string name="transition_scrim_bottom">Transition Scrim Bottom</string>
+
 </resources>

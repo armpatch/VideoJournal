@@ -14,11 +14,11 @@ public class PictureUtils {
         return getScaledBitmap(path, size.x, size.y);
     }
 
-    public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
+    public static Bitmap getScaledBitmap(String videoPath, int destWidth, int destHeight) {
         //read in the dimensions of the image on disk
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
+        BitmapFactory.decodeFile(videoPath, options);
 
         float srcWidth = options.outWidth;
         float srcHeight = options.outHeight;
@@ -37,7 +37,7 @@ public class PictureUtils {
         options.inSampleSize = inSampleSize;
 
         //read in and create final bitmap
-        return BitmapFactory.decodeFile(path, options);
+        return BitmapFactory.decodeFile(videoPath, options);
     }
 
 }
