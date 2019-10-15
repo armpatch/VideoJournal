@@ -108,7 +108,6 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         Pair<View, String> scrimTopPair = new Pair<View, String>(holder.scrimTop, holder.scrimTop.getTransitionName());
         Pair<View, String> scrimBottomPair = new Pair<View, String>(holder.scrimBottom, holder.scrimBottom.getTransitionName());
 
-
         Bundle bundle = ActivityOptions
                 .makeSceneTransitionAnimation(
                         this,

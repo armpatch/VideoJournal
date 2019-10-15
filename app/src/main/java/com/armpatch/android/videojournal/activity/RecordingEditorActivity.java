@@ -62,18 +62,6 @@ public class RecordingEditorActivity extends AppCompatActivity {
         takeVideo();
     }
 
-    private void setThumbnail() {
-        Bitmap thumbnail = PictureUtils.getScaledBitmap(
-                recording.getThumbnailPath(),
-                800,
-                800); // TODO: dimensions should not be hard coded here
-
-        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
-
-        dr.setCornerRadius(4);
-        thumbnailView.setImageDrawable(dr);
-    }
-
     private void takeVideo() {
         recording = new Recording();
 
@@ -121,13 +109,24 @@ public class RecordingEditorActivity extends AppCompatActivity {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
 
-            setThumbnail();
-
-
+            createThumbnail();
         }
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode != RESULT_OK) {
             finish();
         }
     }
+
+    private void createThumbnail() {
+        Bitmap thumbnail = PictureUtils.getScaledBitmap(
+                recording.getThumbnailPath(),
+                800,
+                800); // TODO: dimensions should not be hard coded here
+
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
+
+        dr.setCornerRadius(4);
+        thumbnailView.setImageDrawable(dr);
+    }
+
 }

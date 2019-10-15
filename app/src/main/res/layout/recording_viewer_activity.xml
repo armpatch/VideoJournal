@@ -6,68 +6,78 @@
     android:background="@android:color/black"
     android:orientation="vertical">
 
-    <VideoView
-        android:id="@+id/videoview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerInside"
-        android:transitionName="@string/transition_photo" />
-
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/video_pane"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <com.armpatch.android.videojournal.view.RecordingVideoView
+            android:id="@+id/videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:scaleType="centerInside"
+            />
 
-            <ImageView
-                android:id="@+id/scrim_top"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:rotation="180"
-                android:src="@drawable/scrim"
-                android:transitionName="@string/transition_scrim_top" />
+        <ImageView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:transitionName="@string/transition_photo"
+            android:background="@android:color/holo_red_dark"
+            />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="8" />
+    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/scrim_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:src="@drawable/scrim"
-                android:transitionName="@string/transition_scrim_bottom" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/recording_title"
-            style="@style/ListTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="8dp"
-            android:maxLines="1"
-            android:transitionName="@string/transition_title"
-            tools:text="Recording Name" />
+        <ImageView
+            android:id="@+id/scrim_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:rotation="180"
+            android:src="@drawable/scrim"
+            android:transitionName="@string/transition_scrim_top" />
 
-        <TextView
-            android:id="@+id/date"
-            style="@style/ListDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_margin="8dp"
-            android:maxLines="1"
-            android:transitionName="@string/transition_date"
-            tools:text="Recording Name" />
-    </FrameLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8" />
+
+        <ImageView
+            android:id="@+id/scrim_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:src="@drawable/scrim"
+            android:transitionName="@string/transition_scrim_bottom" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/recording_title"
+        style="@style/ListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="8dp"
+        android:maxLines="1"
+        android:transitionName="@string/transition_title"
+        tools:text="Recording Name" />
+
+    <TextView
+        android:id="@+id/date"
+        style="@style/ListDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_margin="8dp"
+        android:maxLines="1"
+        android:transitionName="@string/transition_date"
+        tools:text="Recording Name" />
 
 </FrameLayout>

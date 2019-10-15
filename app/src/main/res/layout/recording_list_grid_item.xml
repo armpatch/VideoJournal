@@ -19,7 +19,6 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             android:transitionName="@string/transition_photo"
-
             tools:src="@mipmap/nature_1080x1920"
             />
 
@@ -44,7 +43,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"/>
+            android:layout_weight="4" />
 
         <ImageView
             android:id="@+id/grid_scrim_bottom"
@@ -74,7 +73,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginBottom="4dp"
         android:maxLines="1"
-        tools:text="Beast and the Harlot"
+        tools:text="Recording Title"
         android:transitionName="@string/transition_title"
         />
 
