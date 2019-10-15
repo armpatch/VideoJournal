@@ -15,10 +15,11 @@ import com.armpatch.android.videojournal.util.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
 
 public class RecordingHolder extends RecyclerView.ViewHolder
-        implements View.OnClickListener {
+        implements View.OnClickListener, View.OnLongClickListener{
 
     public interface Callbacks {
-        void onRecordingSelected(Recording recording, RecordingHolder holder);
+        void onRecordingClicked(Recording recording, RecordingHolder holder);
+        void onRecordingLongClicked(Recording recording);
     }
 
     private Callbacks callbacks;
@@ -73,11 +74,12 @@ public class RecordingHolder extends RecyclerView.ViewHolder
     }
 
     private void setViewMargin(int position) {
+        // TODO **assumes this ViewHolder is in a grid layout with exactly two columns**
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(itemView.getLayoutParams());
 
         int margin = 6;
 
-        if (position % 2 == 0) {
+        if (position % 2 == 0) { // if position is odd, holder is in the first grid column, assuming two columns are used
             marginLayoutParams.setMargins(0,0,margin,margin * 2);
         } else {
             marginLayoutParams.setMargins(margin,0,0,margin * 2);
@@ -88,6 +90,12 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onClick(View v) {
-        callbacks.onRecordingSelected(recording, this);
+        callbacks.onRecordingClicked(recording, this);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        callbacks.onRecordingLongClicked(recording);
+        return true;
     }
 }

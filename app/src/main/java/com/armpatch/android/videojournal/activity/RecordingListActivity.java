@@ -74,7 +74,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         }
 
         if (!permissionsNeeded.isEmpty()) {
-            requestPermissions(permissionsNeeded.toArray(new String[permissionsNeeded.size()]), 100);
+            requestPermissions(permissionsNeeded.toArray(new String[0]), 100);
         }
     }
 
@@ -98,7 +98,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     }
 
     @Override
-    public void onRecordingSelected(Recording recording, RecordingHolder holder) {
+    public void onRecordingClicked(Recording recording, RecordingHolder holder) {
         Intent intent = RecordingViewerActivity.getIntent(this, recording.getId());
 
         // set shared element transition pairs
@@ -122,4 +122,8 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         startActivity(intent, bundle);
     }
 
+    @Override
+    public void onRecordingLongClicked(Recording recording) {
+        //TODO add highlight feature
+    }
 }
