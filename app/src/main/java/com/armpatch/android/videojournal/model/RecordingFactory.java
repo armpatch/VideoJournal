@@ -105,5 +105,7 @@ public class RecordingFactory {
         return values;
     }
 
+    public void removeRecording() {
 
+    }
 }
