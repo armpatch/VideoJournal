@@ -54,6 +54,7 @@ public class RecordingEditorActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createButton.setClickable(false);
                 saveRecording();
                 finish();
             }
