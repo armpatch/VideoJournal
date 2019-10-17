@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#1B5E20</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="play_icon">#FFFFFF</color>
     <color name="list_recycler_background">#FFFFFF</color>
 
     <color name="list_item_text">#FFFFFF</color>
@@ -15,5 +14,8 @@
     <color name="scrim_dark">#99000000</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="viewer_media_icon_outline">#000000</color>
+    <color name="viewer_media_icon_fill">#FFFFFF</color>
 
 </resources>

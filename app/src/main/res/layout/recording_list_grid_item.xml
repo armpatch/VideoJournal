@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="?android:attr/selectableItemBackground"
     android:longClickable="true">
 
     <android.support.constraint.ConstraintLayout
@@ -33,27 +32,26 @@
             android:id="@+id/grid_scrim_top"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_gravity="top"
+            android:layout_weight="1"
             android:rotation="180"
             android:src="@drawable/scrim"
-            android:layout_gravity="bottom"
-            android:transitionName="@string/transition_scrim_bottom"
-            />
+            android:transitionName="@string/transition_scrim_top" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4" />
+            android:layout_weight="8" />
 
         <ImageView
             android:id="@+id/grid_scrim_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:src="@drawable/scrim"
             android:layout_gravity="bottom"
-            android:transitionName="@string/transition_scrim_top"
-            />
+            android:layout_weight="1"
+            android:src="@drawable/scrim"
+            android:transitionName="@string/transition_scrim_bottom" />
+
     </LinearLayout>
 
     <TextView
@@ -66,8 +64,7 @@
         android:layout_marginBottom="4dp"
         android:maxLines="1"
         tools:text="Recording Title"
-        android:transitionName="@string/transition_title"
-        />
+        android:transitionName="@string/transition_title" />
 
     <TextView
         android:id="@+id/date"
@@ -77,9 +74,7 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_margin="4dp"
         tools:text="10/10/2019"
-        android:transitionName="@string/transition_date"
-        />
-
+        android:transitionName="@string/transition_date" />
 
 </FrameLayout>
 

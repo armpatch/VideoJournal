@@ -3,14 +3,11 @@ package com.armpatch.android.videojournal.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.animation.StateListAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.Placeholder;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +16,7 @@ import android.widget.TextView;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.animation.FadeAnimator;
+import com.armpatch.android.videojournal.view.ExpandingImageView;
 import com.armpatch.android.videojournal.view.RecordingVideoView;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
@@ -34,6 +32,8 @@ public class RecordingViewerActivity extends AppCompatActivity {
     private RecordingVideoView videoView;
     private ImageView scrimTop, scrimBottom, placeholder;
     private RelativeLayout videoPane;
+    private ExpandingImageView expandingPlayIcon;
+    private ExpandingImageView expandingPauseIcon;
 
     private Recording recording;
 
@@ -54,11 +54,9 @@ public class RecordingViewerActivity extends AppCompatActivity {
         setContentView(R.layout.recording_viewer_activity);
 
         getRecordingFromIntent();
-        setupDetails();
-
+        setupViews();
         setupVideoPane();
-
-        loadVideoFile();
+        loadVideoFileInSeparateThread();
     }
 
     private void getRecordingFromIntent() {
@@ -70,7 +68,7 @@ public class RecordingViewerActivity extends AppCompatActivity {
         }
     }
 
-    private void setupDetails() {
+    private void setupViews() {
         title = findViewById(R.id.recording_title);
         title.setText(recording.title);
 
@@ -79,11 +77,13 @@ public class RecordingViewerActivity extends AppCompatActivity {
 
         scrimTop = findViewById(R.id.scrim_top);
         scrimBottom = findViewById(R.id.scrim_bottom);
+
+        expandingPlayIcon = findViewById(R.id.play_icon);
+        expandingPauseIcon = findViewById(R.id.pause_icon);
     }
 
     private void setupVideoPane() {
         /// PLACEHOLDER ///
-
         placeholder = findViewById(R.id.placeholder);
         placeholder.setImageDrawable(new BitmapDrawable(getResources(), recording.getThumbnailPath()));
 
@@ -109,16 +109,12 @@ public class RecordingViewerActivity extends AppCompatActivity {
                     placeholderHideAnimator.start();
                 }
 
-                if (videoView.isPlaying()) {
-                    videoView.pause();
-                } else {
-                    videoView.start();
-                }
+                toggleVideoPlayback();
             }
         });
     }
 
-    private void loadVideoFile() {
+    private void loadVideoFileInSeparateThread() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -139,4 +135,13 @@ public class RecordingViewerActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    private void toggleVideoPlayback() {
+        if (videoView.isPlaying()) {
+            videoView.pause();
+            expandingPauseIcon.showExpandingAnimation();
+        } else {
+            videoView.start();
+            expandingPlayIcon.showExpandingAnimation();
+        }
+    }
 }

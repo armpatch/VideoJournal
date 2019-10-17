@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:orientation="vertical">
+    android:background="@android:color/black">
 
     <RelativeLayout
         android:id="@+id/video_pane"
@@ -15,15 +14,15 @@
             android:id="@+id/videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"
-            />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/placeholder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:transitionName="@string/transition_photo"
-            />
+            android:transitionName="@string/transition_photo" />
 
     </RelativeLayout>
 
@@ -78,5 +77,27 @@
         android:maxLines="1"
         android:transitionName="@string/transition_date"
         tools:text="Recording Name" />
+
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal|center_vertical">
+
+        <com.armpatch.android.videojournal.view.ExpandingImageView
+            android:id="@+id/play_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_play_icon_circle"
+            android:visibility="invisible" />
+
+        <com.armpatch.android.videojournal.view.ExpandingImageView
+            android:id="@+id/pause_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_pause_icon_circle"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
 
 </FrameLayout>
