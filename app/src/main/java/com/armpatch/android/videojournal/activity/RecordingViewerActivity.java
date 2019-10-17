@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.animation.FadeAnimator;
-import com.armpatch.android.videojournal.view.ExpandingImageView;
-import com.armpatch.android.videojournal.view.RecordingVideoView;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.util.TextFormatter;
+import com.armpatch.android.videojournal.view.ExpandingImageView;
+import com.armpatch.android.videojournal.view.RecordingVideoView;
 
 import java.util.UUID;
 
@@ -57,6 +57,7 @@ public class RecordingViewerActivity extends AppCompatActivity {
         setupViews();
         setupVideoPane();
         loadVideoFileInSeparateThread();
+
     }
 
     private void getRecordingFromIntent() {
@@ -132,6 +133,12 @@ public class RecordingViewerActivity extends AppCompatActivity {
         videoView.pause();
         videoView.setVisibility(View.GONE);
         placeholder.setVisibility(View.VISIBLE);
+
+        // prevents shared transitions when returning to previous activity
+        placeholder.setTransitionName(null);
+        title.setTransitionName(null);
+        date.setTransitionName(null);
+
         super.onBackPressed();
     }
 
@@ -144,4 +151,5 @@ public class RecordingViewerActivity extends AppCompatActivity {
             expandingPlayIcon.showExpandingAnimation();
         }
     }
+
 }

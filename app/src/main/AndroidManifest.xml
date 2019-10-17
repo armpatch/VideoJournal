@@ -16,7 +16,8 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.armpatch.android.videojournal.activity.RecordingListActivity">
+            android:name="com.armpatch.android.videojournal.activity.RecordingListActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +25,9 @@
         </activity>
 
         <activity android:name=".activity.RecordingEditorActivity" />
-        <activity android:name=".activity.RecordingViewerActivity" />
+        <activity android:name=".activity.RecordingViewerActivity"
+            android:theme="@style/AppTheme.RecordingViewer"
+            />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
