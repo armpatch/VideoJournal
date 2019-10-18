@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -164,9 +166,34 @@ public class RecordingViewerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.delete_recording) {
-            // RecordingFactory.get(this).updateRecording(); //TODO add ability to delete recording from database
+            confirmDeleteRecording();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void confirmDeleteRecording() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        RecordingFactory.get(RecordingViewerActivity.this).deleteRecording(recording);
+                        finish();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // do nothing
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure?")
+                .setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener)
+                .show();
     }
 }

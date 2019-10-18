@@ -105,7 +105,10 @@ public class RecordingFactory {
         return values;
     }
 
-    public void removeRecording() {
+    public void deleteRecording(Recording recording) {
+        String uuidString = recording.getId().toString();
 
+        database.delete(NAME, RECORDING_UUID + " = ?",
+                new String[]{uuidString});
     }
 }
