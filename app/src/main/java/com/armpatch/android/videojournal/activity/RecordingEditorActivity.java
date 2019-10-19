@@ -14,6 +14,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +33,7 @@ public class RecordingEditorActivity extends AppCompatActivity {
     private static final int REQUEST_VIDEO_CAPTURE = 1;
 
     private Recording recording;
-    private EditText recordingTitleText, notesText;
+    private EditText titleText, notesText;
     Button createButton;
     ImageView thumbnailView;
 
@@ -47,7 +48,7 @@ public class RecordingEditorActivity extends AppCompatActivity {
         setContentView(R.layout.recording_editor_activity);
 
         thumbnailView = findViewById(R.id.thumbnail);
-        recordingTitleText = findViewById(R.id.recording_title);
+        titleText = findViewById(R.id.recording_title);
         notesText = findViewById(R.id.notes);
         createButton = findViewById(R.id.create_button);
 
@@ -90,7 +91,7 @@ public class RecordingEditorActivity extends AppCompatActivity {
 
 
     private void saveRecording() {
-        String titleUserEntered = recordingTitleText.getText().toString();
+        String titleUserEntered = titleText.getText().toString();
 
         if (titleUserEntered.isEmpty()) {
             recording.title = "New Recording";
@@ -111,6 +112,12 @@ public class RecordingEditorActivity extends AppCompatActivity {
             recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
 
             createThumbnail();
+
+            titleText.requestFocus();
+
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
         }
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode != RESULT_OK) {
@@ -129,5 +136,6 @@ public class RecordingEditorActivity extends AppCompatActivity {
         dr.setCornerRadius(4);
         thumbnailView.setImageDrawable(dr);
     }
+
 
 }

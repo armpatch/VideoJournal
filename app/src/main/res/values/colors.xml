@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#66BB6A</color>
-    <color name="colorPrimaryDark">#1B5E20</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#ab47bc</color>
+    <color name="colorPrimaryDark">#790e8b</color>
+    <color name="colorAccent">#9ccc65</color>
 
     <color name="list_recycler_background">#FFFFFF</color>
 
+    <color name="recording_viewer_background">#1E1E1E</color>
+
+
     <color name="list_item_text">#FFFFFF</color>
 
-    <color name="status_bar_background">#000000</color>
-    <color name="action_bar_background">#242424</color>
-    <color name="action_bar_text">#FFFFFF</color>
     <color name="scrim_dark">#99000000</color>
-
-    <color name="transparent">#00000000</color>
 
     <color name="viewer_media_icon_outline">#000000</color>
     <color name="viewer_media_icon_fill">#FFFFFF</color>
+
+    <color name="create_button">#A5D6A7</color>
+
+    <color name="thumbnail_preview_foreground">#66000000</color>
+
 
 </resources>

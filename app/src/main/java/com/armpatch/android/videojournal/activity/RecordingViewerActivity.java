@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,8 +35,8 @@ public class RecordingViewerActivity extends AppCompatActivity {
 
     private TextView title, date;
     private RecordingVideoView videoView;
-    private ImageView scrimTop, scrimBottom, placeholder;
-    private RelativeLayout videoPane;
+    private ImageView placeholder;
+    private FrameLayout videoPane;
     private ExpandingImageView expandingPlayIcon;
     private ExpandingImageView expandingPauseIcon;
 
@@ -80,9 +81,6 @@ public class RecordingViewerActivity extends AppCompatActivity {
         date = findViewById(R.id.date);
         date.setText(TextFormatter.getSimpleDateString(recording.date));
 
-        scrimTop = findViewById(R.id.scrim_top);
-        scrimBottom = findViewById(R.id.scrim_bottom);
-
         expandingPlayIcon = findViewById(R.id.play_icon);
         expandingPauseIcon = findViewById(R.id.pause_icon);
     }
@@ -111,7 +109,8 @@ public class RecordingViewerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (placeholder.getVisibility() == View.VISIBLE) {
                     videoView.setVisibility(View.VISIBLE);
-                    placeholderHideAnimator.start();
+                    // placeholderHideAnimator.start();
+                    placeholder.setVisibility(View.INVISIBLE);
                 }
 
                 toggleVideoPlayback();

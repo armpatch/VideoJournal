@@ -9,6 +9,4 @@ public class RecordingVideoView extends VideoView {
     public RecordingVideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
-
 }

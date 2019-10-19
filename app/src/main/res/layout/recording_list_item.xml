@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="top"
-            android:layout_weight="1"
+            android:layout_weight="40"
             android:rotation="180"
             android:src="@drawable/scrim"
             android:transitionName="@string/transition_scrim_top" />
@@ -41,14 +41,14 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8" />
+            android:layout_weight="20" />
 
         <ImageView
             android:id="@+id/grid_scrim_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="bottom"
-            android:layout_weight="1"
+            android:layout_weight="40"
             android:src="@drawable/scrim"
             android:transitionName="@string/transition_scrim_bottom" />
 
@@ -59,7 +59,7 @@
         style="@style/ListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
+        android:layout_gravity="bottom|left"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="4dp"
         android:maxLines="1"

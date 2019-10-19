@@ -13,5 +13,6 @@
     <string name="transition_scrim_top">Transition Scrim Top</string>
     <string name="transition_scrim_bottom">Transition Scrim Bottom</string>
     <string name="delete_menu_item">Delete</string>
+    <string name="editor_preview">PREVIEW</string>
 
 </resources>
