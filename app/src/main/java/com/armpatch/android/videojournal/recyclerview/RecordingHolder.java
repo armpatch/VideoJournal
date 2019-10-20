@@ -5,21 +5,19 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.armpatch.android.videojournal.util.PictureUtils;
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.util.TextFormatter;
 import com.armpatch.android.videojournal.model.Recording;
+import com.armpatch.android.videojournal.util.PictureUtils;
+import com.armpatch.android.videojournal.util.TextFormatter;
 
 public class RecordingHolder extends RecyclerView.ViewHolder
-        implements View.OnClickListener, View.OnLongClickListener{
+        implements View.OnClickListener{
 
     public interface Callbacks {
         void onRecordingClicked(Recording recording, RecordingHolder holder);
-        void onRecordingLongClicked(Recording recording);
     }
 
     private Callbacks callbacks;
@@ -27,7 +25,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     public TextView title, date;
     public ImageView thumbnail;
-    public ImageView scrimTop, scrimBottom;
+    private ImageView scrimTop, scrimBottom;
 
     RecordingHolder(View view) {
         super(view);
@@ -50,7 +48,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         itemView.setOnClickListener(this);
     }
 
-    void bind(Recording recording, int position) {
+    void bind(Recording recording) {
         this.recording = recording;
         title.setText(recording.title);
 
@@ -58,44 +56,24 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         date.setText(dateString);
 
         setThumbnail(recording);
-        setViewMargin(position);
     }
 
     private void setThumbnail(Recording recording) {
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
-                800,
-                800); // TODO: dimensions probably shouldn't be hard coded here
+                600,
+                600); // TODO: dimensions probably shouldn't be hard coded here
 
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(this.thumbnail.getResources(), thumbnail);
 
-        dr.setCornerRadius(4);
         this.thumbnail.setImageDrawable(dr);
-    }
-
-    private void setViewMargin(int position) {
-        // TODO **assumes this ViewHolder is in a grid layout with exactly two columns**
-        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(itemView.getLayoutParams());
-
-        int margin = 8;
-
-        if (position % 2 == 0) { // if position is odd, holder is in the first grid column, assuming two columns are used
-            marginLayoutParams.setMargins(0,0,margin,margin * 2);
-        } else {
-            marginLayoutParams.setMargins(margin,0,0,margin * 2);
-        }
-
-        itemView.setLayoutParams(marginLayoutParams);
     }
 
     @Override
     public void onClick(View v) {
-        callbacks.onRecordingClicked(recording, this);
-    }
+        scrimTop.setVisibility(View.INVISIBLE);
+        scrimBottom.setVisibility(View.INVISIBLE);
 
-    @Override
-    public boolean onLongClick(View v) {
-        callbacks.onRecordingLongClicked(recording);
-        return true;
+        callbacks.onRecordingClicked(recording, this);
     }
 }

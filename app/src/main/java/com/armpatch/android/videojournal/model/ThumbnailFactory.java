@@ -18,7 +18,7 @@ public class ThumbnailFactory {
         String videoPath = recording.getVideoPath();
 
         Bitmap bitmap;
-        bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.MINI_KIND);
+        bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.FULL_SCREEN_KIND);
 
         File bitmapFile = new File(context.getFilesDir(), ImageName);
 

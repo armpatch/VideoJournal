@@ -103,25 +103,16 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         Pair<View, String> imagePair = new Pair<View, String>(holder.thumbnail, holder.thumbnail.getTransitionName());
         Pair<View, String> titlePair = new Pair<View, String>(holder.title, holder.title.getTransitionName());
         Pair<View, String> datePair = new Pair<View, String>(holder.date, holder.date.getTransitionName());
-        Pair<View, String> scrimTopPair = new Pair<View, String>(holder.scrimTop, holder.scrimTop.getTransitionName());
-        Pair<View, String> scrimBottomPair = new Pair<View, String>(holder.scrimBottom, holder.scrimBottom.getTransitionName());
 
         Bundle bundle = ActivityOptions
                 .makeSceneTransitionAnimation(
                         this,
                         imagePair,
                         titlePair,
-                        datePair,
-                        scrimTopPair,
-                        scrimBottomPair
+                        datePair
                         )
                 .toBundle();
 
         startActivity(intent, bundle);
-    }
-
-    @Override
-    public void onRecordingLongClicked(Recording recording) {
-        //TODO add highlight feature
     }
 }

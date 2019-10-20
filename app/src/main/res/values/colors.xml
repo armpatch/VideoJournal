@@ -8,7 +8,6 @@
     <color name="text">#FFFFFF</color>
     <color name="hint_text">#D3D3D3</color>
 
-
     <color name="scrim">#99000000</color>
 
     <color name="play_pause_icon_outline">#000000</color>
@@ -20,5 +19,5 @@
 
     <color name="rounded_rectangle_background">#CACACA</color>
 
-
+    <color name="list_item_pressed_foreground">#4D000000</color>
 </resources>

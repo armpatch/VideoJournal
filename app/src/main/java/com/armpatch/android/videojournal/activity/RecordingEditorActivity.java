@@ -4,16 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +24,6 @@ import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.model.ThumbnailFactory;
-import com.armpatch.android.videojournal.util.PictureUtils;
 
 import java.io.File;
 import java.util.List;
@@ -111,8 +108,10 @@ public class RecordingEditorActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
-            createThumbnail();
+            String thumbnailPath = ThumbnailFactory.createThumbnail(this, recording);
+
+            recording.setThumbnailPath(thumbnailPath);
+            thumbnailView.setImageDrawable(new BitmapDrawable(getResources(), recording.getThumbnailPath()));
 
             titleText.requestFocus();
 
@@ -128,18 +127,6 @@ public class RecordingEditorActivity extends AppCompatActivity{
         }
 
         finish();
-    }
-
-    private void createThumbnail() {
-        Bitmap thumbnail = PictureUtils.getScaledBitmap(
-                recording.getThumbnailPath(),
-                800,
-                800); // TODO: dimensions should not be hard coded here
-
-        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(thumbnailView.getResources(), thumbnail);
-
-        dr.setCornerRadius(4);
-        thumbnailView.setImageDrawable(dr);
     }
 
     @Override

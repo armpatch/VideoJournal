@@ -7,31 +7,18 @@
     android:orientation="vertical"
     >
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/scrim_top"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:rotation="180"
-            android:src="@drawable/scrim"
-            android:transitionName="@string/transition_scrim_top" />
-
-        <TextView
-            android:id="@+id/date"
-            style="@style/ListDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_margin="8dp"
-            android:maxLines="1"
-            android:transitionName="@string/transition_date"
-            tools:text="Recording Name" />
-
-    </FrameLayout>
+    <TextView
+        android:elevation="20dp"
+        android:id="@+id/date"
+        style="@style/ListDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_margin="8dp"
+        android:maxLines="1"
+        android:transitionName="@string/transition_date"
+        tools:text="Sat, Oct 19 19"
+        />
 
     <FrameLayout
         android:id="@+id/video_pane"
@@ -78,30 +65,16 @@
 
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:elevation="4dp"
+        android:id="@+id/recording_title"
+        style="@style/ListTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/scrim_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:src="@drawable/scrim"
-            android:transitionName="@string/transition_scrim_bottom" />
-
-        <TextView
-            android:id="@+id/recording_title"
-            style="@style/ListTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="8dp"
-            android:maxLines="1"
-            android:transitionName="@string/transition_title"
-            tools:text="Recording Name" />
-
-    </FrameLayout>
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="8dp"
+        android:maxLines="1"
+        android:transitionName="@string/transition_title"
+        tools:text="Recording Name" />
 
 </LinearLayout>
