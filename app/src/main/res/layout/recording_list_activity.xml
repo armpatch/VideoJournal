@@ -4,13 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_dark_grey"
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/recording_viewer_background"
+        android:background="@color/background_dark_grey"
 
         tools:layoutManager="android.support.v7.widget.GridLayoutManager"
         tools:listitem="@layout/recording_list_item"

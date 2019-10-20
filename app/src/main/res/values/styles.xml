@@ -12,6 +12,7 @@
 
     <style name="AppTheme.RecordingViewer" >
         <item name="android:windowReturnTransition">@transition/slide_return</item>
+        <item name="android:windowBackground">@color/background_dark_grey</item>
     </style>
 
 

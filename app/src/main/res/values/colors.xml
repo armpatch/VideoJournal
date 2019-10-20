@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#790e8b</color>
     <color name="colorAccent">#9ccc65</color>
 
-    <color name="recording_viewer_background">#1E1E1E</color>
+    <color name="background_dark_grey">#1E1E1E</color>
     <color name="text">#FFFFFF</color>
     <color name="hint_text">#D3D3D3</color>
 
