@@ -36,8 +36,6 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         setContentView(R.layout.recording_list_activity);
 
         recyclerView = findViewById(R.id.recycler_view);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(gridLayoutManager);
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

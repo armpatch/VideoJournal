@@ -12,13 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_dark_grey"
+        app:spanCount="2"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
 
-        tools:layoutManager="android.support.v7.widget.GridLayoutManager"
+
         tools:listitem="@layout/recording_list_item"
-        tools:itemCount="6"
-        tools:orientation="vertical"
-        tools:scrollbars="horizontal"
-        tools:spanCount="2"
         >
 
     </android.support.v7.widget.RecyclerView>
