@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -28,7 +31,7 @@ import com.armpatch.android.videojournal.util.PictureUtils;
 import java.io.File;
 import java.util.List;
 
-public class RecordingEditorActivity extends AppCompatActivity {
+public class RecordingEditorActivity extends AppCompatActivity{
 
     private static final int REQUEST_VIDEO_CAPTURE = 1;
 
@@ -89,7 +92,6 @@ public class RecordingEditorActivity extends AppCompatActivity {
         }
     }
 
-
     private void saveRecording() {
         String titleUserEntered = titleText.getText().toString();
 
@@ -110,19 +112,22 @@ public class RecordingEditorActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             recording.setThumbnailPath(ThumbnailFactory.createThumbnail(this, recording));
-
             createThumbnail();
 
             titleText.requestFocus();
 
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(titleText, InputMethodManager.SHOW_IMPLICIT);
+                }
+            }, 100);
+            return;
         }
 
-        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode != RESULT_OK) {
-            finish();
-        }
+        finish();
     }
 
     private void createThumbnail() {
@@ -137,5 +142,21 @@ public class RecordingEditorActivity extends AppCompatActivity {
         thumbnailView.setImageDrawable(dr);
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if ( v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
+    }
 
 }
