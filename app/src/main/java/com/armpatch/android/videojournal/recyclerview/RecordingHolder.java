@@ -64,8 +64,8 @@ public class RecordingHolder extends RecyclerView.ViewHolder
     private void setThumbnail(Recording recording) {
         Bitmap thumbnail = PictureUtils.getScaledBitmap(
                 recording.getThumbnailPath(),
-                400,
-                400); // TODO: dimensions probably shouldn't be hard coded here
+                800,
+                800); // TODO: dimensions probably shouldn't be hard coded here
 
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(this.thumbnail.getResources(), thumbnail);
 
@@ -77,7 +77,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         // TODO **assumes this ViewHolder is in a grid layout with exactly two columns**
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(itemView.getLayoutParams());
 
-        int margin = 6;
+        int margin = 8;
 
         if (position % 2 == 0) { // if position is odd, holder is in the first grid column, assuming two columns are used
             marginLayoutParams.setMargins(0,0,margin,margin * 2);
