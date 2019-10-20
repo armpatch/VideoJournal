@@ -5,10 +5,10 @@
         android:viewportHeight="24.0">
 
     <path
-        android:fillColor="@color/viewer_media_icon_outline"
+        android:fillColor="@color/play_pause_icon_outline"
         android:pathData="M 12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z" />
     <path
-    android:fillColor="@color/viewer_media_icon_fill"
+    android:fillColor="@color/play_pause_icon_fill"
     android:pathData="M10,16.5l6,-4.5 -6,-4.5v9z"  />
 
 </vector>

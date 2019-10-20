@@ -4,21 +4,21 @@
     <color name="colorPrimaryDark">#790e8b</color>
     <color name="colorAccent">#9ccc65</color>
 
-    <color name="list_recycler_background">#FFFFFF</color>
-
     <color name="recording_viewer_background">#1E1E1E</color>
+    <color name="text">#FFFFFF</color>
+    <color name="hint_text">#D3D3D3</color>
 
 
-    <color name="list_item_text">#FFFFFF</color>
+    <color name="scrim">#99000000</color>
 
-    <color name="scrim_dark">#99000000</color>
-
-    <color name="viewer_media_icon_outline">#000000</color>
-    <color name="viewer_media_icon_fill">#FFFFFF</color>
+    <color name="play_pause_icon_outline">#000000</color>
+    <color name="play_pause_icon_fill">#FFFFFF</color>
 
     <color name="create_button">#A5D6A7</color>
 
     <color name="thumbnail_preview_foreground">#66000000</color>
+
+    <color name="rounded_rectangle_background">#CACACA</color>
 
 
 </resources>
