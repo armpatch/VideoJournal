@@ -1,36 +1,27 @@
 # VideoJournal
 
-An Android app for creating a journal of videos.
-
 ## Overview
 
-Video Journal is an app for anyone wanting to measure their progress over time in their field of interest. The app provides a minimalist interface to record and playback videos, and gives the option to provide a title and some notes for the recording.
+Video Journal is an app for anyone wanting to measure their progress over time in their field of interest. The app provides a simple interface to record videos and save them with a custom title and description.
 
 ## Activities
 
-### - RecordingListActivity (Main Activity)
-This is the first activity that the user is presented with when they open the app. The first time the app is started, they will be prompted to provide permissions to read/write to storage and to record video.
+### - Recording List Activity (Main Activity)
+This is the first activity that the user is presented with when they open the app. After installation, they will be prompted to provide permissions to read/write to storage and to record video.
 
-To create a their first entry, the user can click the floating action button, which will start the second activity: RecordingEditorActivity.
+Clicking the floating action button will start the Recording Editor Activity and prompt the user to record a video.
 
 ### - Recording Editor Activity (Activity 2):
-Immediately after this activity is started, it starts an external activity using the phone's default recording device. If the user does not successfully record a video, they will be returned to the recording list activity without submitting a new entry. Otherwise, they will be prompted to enter the title and description for the recording. 
+Before the second activity’s layout is drawn, the user is directed to record a video using their phone’s default camera app. After returning from this activity, one of two things will happen. If the user does not record a video, they will be returned to the recording list activity. Otherwise, they will be prompted to enter the title and a description for the new recording. 
 
-Before returning to the Recording Editor, a thumbnail is created and the path is saved to the recording database entry, in addition to the mp4 video filepath. The bitmap is applied to an ImageView as a still preview to the recording.
+In the editor, a bitmap is created from the first frame of the video to be used as a thumbnail. The image file path is saved in the SQLite table row associated with this recording, along with the video path, title, date, description and unique identifier.
 
 ### - Recording Viewer Activity (Activity 3):
-This activity is opened when a list item is clicked from the main activity. This screen shows a large videoView with the recording, as well as title and date textViews. In order to create a more seamless transition between the activities, shared elements were added between this and the RecordingListActivity. Originally, the three shared elements were the title, date, and videoView. However, videoViews proved problematic for transitions because they appear black while loading their video, and immediately before being started. This resulted in a disjointed transition between the two activitie. 
-
-In order for the animation to be coherent, a placeholder thumbnail was placed on top of the video view and acted as the shared element in its place. An onClickListener was attached to the container holding the videoview and placeholder, rather than directly to the videoView. Clicking the container removed the placeholder and reveals the videoView below, which starts to play. Ideally, this transition would not be noticeable, however, the videoView still flashes black for an instant before starting.
+By clicking one of the list items in the main activity, the Recording Viewer Activity is started, which shows a video View, title, and date. To create a smooth transition between activities, shared elements were implemented to animate the thumbnail, title, and date. When the video container is clicked, the thumbnail placeholder is set to invisible before playing the video. From this screen, there is also the option to delete the recording, by clicking the menu item in the top right-hand corner of the screen.
 
 ## Components and Libraries
 
-- RecyclerView with a GridLayoutManager for the List Activity
-- SQLite Database was used to store recording objects, containing a date, title, description, and a path to the video and thumbnail files
-- Used ObjectAnimators to create the play and pause indicators for the videoviews
-
-## Authors
-
-**Aaron Patch** - (https://github.com/armpatch)
-
-## Acknowledgments
+- RecyclerView with a Grid Layout Manager for the List Activity
+- SQLite Database was used to store recording entry information and paths to files
+- FileProvider was used to store Videos and Images in a private local directory 
+- Used ObjectAnimators and vector drawables to create play and pause visual indicators
