@@ -32,4 +32,4 @@ By clicking one of the list items in the main activity, the Recording Viewer Act
 - SQLite Database was used to store recording entry information and paths to files
 - FileProvider was used to store videos and images in a private local directory 
 - Object Animators and vector drawables were used to create play and pause animations for the videos
-- CardViews and contraint layouts were used for positioning assets on screen
+- CardViews and constraint layouts were used for positioning assets on screen
