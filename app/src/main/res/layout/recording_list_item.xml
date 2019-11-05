@@ -1,84 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="3dp"
-    android:foreground="@drawable/foreground_tint">
+    android:layout_height="150dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="10dp"
+    android:foreground="@drawable/foreground_tint"
+    android:layout_margin="6dp"
+    >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:transitionName="@string/transition_photo"
-            app:layout_constraintDimensionRatio="1:1"
-            tools:ignore="MissingConstraints"
-            tools:src="@mipmap/nature_1080x1920" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/thumbnail_card"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:transitionName="@string/transition_photo"
+                tools:background="@mipmap/nature_1080x1920"
+                />
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/recording_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textColor="@color/text_black"
+            android:textSize="20sp"
+            android:transitionName="@string/transition_title"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@id/thumbnail_card"
+            tools:text="Recording Title" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            android:transitionName="@string/transition_date"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail_card"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            tools:text="10/10/2019" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="170dp" />
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="4dp"
-        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/grid_scrim_top"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="top"
-            android:layout_weight="40"
-            android:rotation="180"
-            android:src="@drawable/scrim"
-            android:transitionName="@string/transition_scrim_top" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="20" />
-
-        <ImageView
-            android:id="@+id/grid_scrim_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="bottom"
-            android:layout_weight="40"
-            android:src="@drawable/scrim"
-            android:transitionName="@string/transition_scrim_bottom" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/recording_title"
-        style="@style/ListTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start|bottom"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="4dp"
-        android:elevation="6dp"
-        android:maxLines="1"
-        android:transitionName="@string/transition_title"
-        tools:text="Recording Title" />
-
-    <TextView
-        android:id="@+id/date"
-        style="@style/ListDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_margin="4dp"
-        android:elevation="6dp"
-        android:transitionName="@string/transition_date"
-        tools:text="10/10/2019" />
-
-</FrameLayout>
+</android.support.v7.widget.CardView>
 

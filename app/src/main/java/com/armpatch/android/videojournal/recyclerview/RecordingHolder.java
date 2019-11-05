@@ -25,7 +25,6 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     public TextView title, date;
     public ImageView thumbnail;
-    private ImageView scrimTop, scrimBottom;
 
     RecordingHolder(View view) {
         super(view);
@@ -40,8 +39,6 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         title = itemView.findViewById(R.id.recording_title);
         date = itemView.findViewById(R.id.date);
         thumbnail = itemView.findViewById(R.id.thumbnail);
-        scrimTop = itemView.findViewById(R.id.grid_scrim_top);
-        scrimBottom = itemView.findViewById(R.id.grid_scrim_bottom);
     }
 
     private void setListeners() {
@@ -71,9 +68,6 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onClick(View v) {
-        scrimTop.setVisibility(View.INVISIBLE);
-        scrimBottom.setVisibility(View.INVISIBLE);
-
         callbacks.onRecordingClicked(recording, this);
     }
 }
