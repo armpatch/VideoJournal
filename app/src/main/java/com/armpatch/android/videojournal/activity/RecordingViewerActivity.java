@@ -136,9 +136,6 @@ public class RecordingViewerActivity extends AppCompatActivity {
         videoView.setVisibility(View.GONE);
         placeholder.setVisibility(View.VISIBLE);
 
-        // prevents shared transitions when returning to previous activity
-        placeholder.setTransitionName(null);
-
         super.onBackPressed();
     }
 

@@ -15,5 +15,6 @@
     <string name="delete_menu_item">Delete</string>
     <string name="editor_preview">PREVIEW</string>
     <string name="recording_list_header">Recordings:</string>
+    <string name="recorded">Recorded</string>
 
 </resources>

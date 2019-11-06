@@ -1,5 +1,6 @@
 package com.armpatch.android.videojournal.recyclerview;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;

@@ -57,14 +57,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="16dp"
+        android:layout_margin="4dp"
         android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="100"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date"
-        app:layout_constraintWidth_percent="100">
+        app:layout_constraintBottom_toBottomOf="@id/card"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/date">
 
         <com.armpatch.android.videojournal.view.RecordingVideoView
             android:id="@+id/videoview"
