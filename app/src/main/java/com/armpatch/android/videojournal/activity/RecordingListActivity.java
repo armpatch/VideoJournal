@@ -102,13 +102,15 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         Pair<View, String> imagePair = new Pair<View, String>(holder.thumbnail, holder.thumbnail.getTransitionName());
         Pair<View, String> titlePair = new Pair<View, String>(holder.title, holder.title.getTransitionName());
         Pair<View, String> datePair = new Pair<View, String>(holder.date, holder.date.getTransitionName());
+        Pair<View, String> cardPair = new Pair<View, String>(holder.cardView, holder.cardView.getTransitionName());
 
         Bundle bundle = ActivityOptions
                 .makeSceneTransitionAnimation(
                         this,
                         imagePair,
                         titlePair,
-                        datePair
+                        datePair,
+                        cardPair
                         )
                 .toBundle();
 

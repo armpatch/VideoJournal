@@ -138,8 +138,6 @@ public class RecordingViewerActivity extends AppCompatActivity {
 
         // prevents shared transitions when returning to previous activity
         placeholder.setTransitionName(null);
-        title.setTransitionName(null);
-        date.setTransitionName(null);
 
         super.onBackPressed();
     }

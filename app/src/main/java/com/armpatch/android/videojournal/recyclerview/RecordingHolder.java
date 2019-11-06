@@ -3,6 +3,7 @@ package com.armpatch.android.videojournal.recyclerview;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     public TextView title, date;
     public ImageView thumbnail;
+    public CardView cardView;
 
     RecordingHolder(View view) {
         super(view);
@@ -39,6 +41,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         title = itemView.findViewById(R.id.recording_title);
         date = itemView.findViewById(R.id.date);
         thumbnail = itemView.findViewById(R.id.thumbnail);
+        cardView = itemView.findViewById(R.id.list_item_card);
     }
 
     private void setListeners() {

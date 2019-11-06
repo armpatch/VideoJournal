@@ -27,7 +27,6 @@
         <activity android:name=".activity.RecordingEditorActivity"
             />
         <activity android:name=".activity.RecordingViewerActivity"
-            android:theme="@style/AppTheme.RecordingViewer"
             />
 
         <provider
