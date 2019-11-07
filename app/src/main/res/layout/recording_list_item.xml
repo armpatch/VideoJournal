@@ -22,6 +22,7 @@
             android:layout_height="130dp"
             android:layout_marginStart="5dp"
             app:cardCornerRadius="6dp"
+            android:outlineProvider="none"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent">
@@ -39,7 +40,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_play_icon_no_circle" />
+                android:src="@drawable/ic_play_triangle" />
 
         </android.support.v7.widget.CardView>
 
@@ -57,7 +58,6 @@
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/text_background_transparent"
                 android:maxLines="1"
                 android:outlineProvider="none"
                 android:transitionName="@string/transition_title"
@@ -68,7 +68,6 @@
                 style="@style/ListItemSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/text_background_transparent"
                 android:transitionName="@string/transition_date"
                 tools:text="10/10/2019" />
 

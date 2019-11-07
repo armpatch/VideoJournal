@@ -13,7 +13,7 @@
     <color name="text_background_transparent">#80FFFFFF</color>
 
 
-    <color name="play_pause_icon_outline">#000000</color>
+    <color name="play_pause_icon_outline">#3C3C3C</color>
     <color name="play_pause_icon_fill">#FFFFFF</color>
 
     <color name="create_button_tint">#A5D6A7</color>

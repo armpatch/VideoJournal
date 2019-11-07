@@ -14,6 +14,7 @@
         android:layout_margin="8dp"
         android:transitionName="@string/transition_card"
         app:cardCornerRadius="6dp"
+        android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +25,7 @@
         style="@style/ListItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@color/text_background_transparent"
+        android:layout_marginTop="8dp"
         android:elevation="6dp"
         android:maxLines="1"
         android:outlineProvider="none"
@@ -40,8 +40,7 @@
         style="@style/ListItemSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@color/text_background_transparent"
+        android:layout_marginTop="8dp"
         android:elevation="6dp"
         android:maxLines="1"
         android:outlineProvider="none"
@@ -57,7 +56,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="@id/card"
         app:layout_constraintEnd_toEndOf="@id/card"
@@ -69,7 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            />
 
         <ImageView
             android:id="@+id/placeholder"
@@ -78,23 +78,23 @@
             android:transitionName="@string/transition_photo" />
 
         <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_gravity="center_horizontal|center_vertical"
-            tools:background="@drawable/ic_pause_icon_circle">
+            tools:background="@drawable/ic_pause">
 
             <com.armpatch.android.videojournal.view.ExpandingImageView
                 android:id="@+id/play_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_play_icon_circle"
+                android:src="@drawable/ic_play"
                 android:visibility="invisible" />
 
             <com.armpatch.android.videojournal.view.ExpandingImageView
                 android:id="@+id/pause_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_pause_icon_circle"
+                android:src="@drawable/ic_pause"
                 android:visibility="invisible" />
 
         </FrameLayout>
