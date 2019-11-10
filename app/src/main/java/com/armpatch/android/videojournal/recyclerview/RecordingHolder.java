@@ -1,8 +1,10 @@
 package com.armpatch.android.videojournal.recyclerview;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +27,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     public TextView title, date;
     public ImageView thumbnail;
-    private ImageView scrimTop, scrimBottom;
+    public CardView cardView;
 
     RecordingHolder(View view) {
         super(view);
@@ -40,8 +42,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         title = itemView.findViewById(R.id.recording_title);
         date = itemView.findViewById(R.id.date);
         thumbnail = itemView.findViewById(R.id.thumbnail);
-        scrimTop = itemView.findViewById(R.id.grid_scrim_top);
-        scrimBottom = itemView.findViewById(R.id.grid_scrim_bottom);
+        cardView = itemView.findViewById(R.id.list_item_card);
     }
 
     private void setListeners() {
@@ -71,9 +72,6 @@ public class RecordingHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onClick(View v) {
-        scrimTop.setVisibility(View.INVISIBLE);
-        scrimBottom.setVisibility(View.INVISIBLE);
-
         callbacks.onRecordingClicked(recording, this);
     }
 }

@@ -7,27 +7,26 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowBackground">@color/background_dark_grey</item>
+        <item name="android:windowBackground">@color/item_list_background</item>
 
     </style>
 
-    <style name="AppTheme.RecordingViewer" >
-        <item name="android:windowReturnTransition">@transition/slide_return</item>
-    </style>
-
-
-    <style name="ListTitle">
+    <style name="ListItemTextWhite">
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">20sp</item>
-
     </style>
 
+    <style name="ListItemTitle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 
-    <style name="ListDetail">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">@color/text</item>
-        <item name="android:textSize">14sp</item>
+    <style name="ListItemSubtitle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

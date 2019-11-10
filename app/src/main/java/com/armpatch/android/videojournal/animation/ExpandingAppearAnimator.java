@@ -11,9 +11,9 @@ public class ExpandingAppearAnimator {
 
     public static ObjectAnimator get(final View view) {
 
-        final float scaleStart = 0.5f;
+        final float scaleStart = 0.7f;
         final float scaleEnd = 1.0f;
-        int duration = 300;
+        int duration = 500;
 
         PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1.0f, 0.0f);
         PropertyValuesHolder scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, scaleStart, scaleEnd);
