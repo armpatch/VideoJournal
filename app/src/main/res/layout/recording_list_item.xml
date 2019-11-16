@@ -22,7 +22,7 @@
             android:layout_height="130dp"
             android:layout_marginStart="5dp"
             app:cardCornerRadius="6dp"
-            android:outlineProvider="none"
+            android:elevation="0dp"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent">

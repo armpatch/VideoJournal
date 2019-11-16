@@ -2,15 +2,20 @@ package com.armpatch.android.videojournal.activity;
 
 import android.Manifest;
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.model.Recording;
@@ -24,7 +29,8 @@ import java.util.List;
 public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
 
     RecyclerView recyclerView;
-    FloatingActionButton fab;
+    View revealFrame;
+    FloatingActionButton floatingButton;
 
     private RecordingAdapter recordingAdapter;
 
@@ -34,14 +40,14 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recording_list_activity);
 
+        revealFrame = findViewById(R.id.circular_reveal);
         recyclerView = findViewById(R.id.recycler_view);
 
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        floatingButton = findViewById(R.id.fab);
+        floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = RecordingEditorActivity.getIntent(RecordingListActivity.this);
-                startActivity(intent);
+                showNewEntryDialog();
             }
         });
 
@@ -78,6 +84,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     protected void onResume() {
         super.onResume();
+        revealFrame.setVisibility(View.INVISIBLE);
         updateRecyclerView();
     }
 
@@ -115,5 +122,33 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
                 .toBundle();
 
         startActivity(intent, bundle);
+    }
+
+    private void showNewEntryDialog() {
+        final Dialog dialog = new Dialog(this);
+
+        dialog.setContentView(R.layout.dialog_new_entry);
+        View folderButton = dialog.findViewById(R.id.folder_button_container);
+        final View cameraButton = dialog.findViewById(R.id.camera_button_container);
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                startActivity(RecordingEditorActivity.getIntent(RecordingListActivity.this));
+            }
+        });
+
+        folderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RecordingListActivity.this,
+                        "FEATURE NOT AVAILABLE" ,
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        dialog.show();
     }
 }
