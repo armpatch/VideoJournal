@@ -3,7 +3,7 @@
 ## Overview
 
 Video Journal is an app for recording yourself playing an instrument and keep track of progress over time.
-The app provides a simple interface to record and save vidoes with a custom title and description.
+The app provides a simple interface to record and save videos with a custom title and date.
 
 ## Activities
 
