@@ -13,17 +13,20 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.model.Recording;
 import com.armpatch.android.videojournal.model.RecordingFactory;
 import com.armpatch.android.videojournal.model.ThumbnailFactory;
+import com.armpatch.android.videojournal.util.FileUtils;
 
 import java.io.File;
 import java.util.List;
@@ -31,14 +34,22 @@ import java.util.List;
 public class RecordingEditorActivity extends AppCompatActivity{
 
     private static final int REQUEST_VIDEO_CAPTURE = 1;
+    private static final int REQUEST_CHOOSE_VIDEO = 2;
+    public static final String ACTION_RECORD_VIDEO = "Record Video";
+    public static final String ACTION_CHOOSE_VIDEO = "Choose Video";
+    private static final String EXTRA_KEY = "RecordingEditorActivity.Action";
 
     private Recording recording;
-    private EditText titleText, notesText;
+    private EditText titleText;
     Button createButton;
     ImageView thumbnailView;
 
-    public static Intent getIntent(Context activityContext) {
-        return new Intent(activityContext, RecordingEditorActivity.class);
+    public static Intent getIntent(Context activityContext, String action) {
+        Intent intent = new Intent(activityContext, RecordingEditorActivity.class);
+
+        Bundle extras = new Bundle();
+        extras.putSerializable(EXTRA_KEY, action);
+        return intent.putExtras(extras);
     }
 
     @Override
@@ -49,7 +60,6 @@ public class RecordingEditorActivity extends AppCompatActivity{
 
         thumbnailView = findViewById(R.id.thumbnail);
         titleText = findViewById(R.id.recording_title);
-        notesText = findViewById(R.id.notes);
         createButton = findViewById(R.id.create_button);
 
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +71,9 @@ public class RecordingEditorActivity extends AppCompatActivity{
             }
         });
 
-        takeVideo();
+        String action = (String) getIntent().getExtras().getSerializable(EXTRA_KEY);
+        if (ACTION_RECORD_VIDEO.equals(action)) takeVideo();
+        if (ACTION_CHOOSE_VIDEO.equals(action)) chooseVideo();
     }
 
     private void takeVideo() {
@@ -89,6 +101,22 @@ public class RecordingEditorActivity extends AppCompatActivity{
         }
     }
 
+    private void chooseVideo() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("video/mp4");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select a File to Upload"),
+                    REQUEST_CHOOSE_VIDEO);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // Potentially direct the user to the Market with a Dialog
+            Toast.makeText(this, "Please install a File Manager.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void saveRecording() {
         String titleUserEntered = titleText.getText().toString();
 
@@ -97,8 +125,6 @@ public class RecordingEditorActivity extends AppCompatActivity{
         } else {
             recording.title = titleUserEntered;
         }
-
-        recording.notes = notesText.getText().toString();
 
         RecordingFactory.get(this).addRecording(recording);
     }
@@ -115,6 +141,7 @@ public class RecordingEditorActivity extends AppCompatActivity{
 
             titleText.requestFocus();
 
+            // show the keyboard after a delay of .1 seconds after returning from recorder TODO find better solution
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -126,7 +153,29 @@ public class RecordingEditorActivity extends AppCompatActivity{
             return;
         }
 
-        finish();
+        if (requestCode == REQUEST_CHOOSE_VIDEO && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+
+            File file = new File(uri.getPath()); //create path from uri
+            final String[] split = file.getPath().split(":");//split the path.
+            String sourcePath = split[1]; //assign it to a string(your choice).
+
+            Toast.makeText(this, "path= " + sourcePath, Toast.LENGTH_SHORT).show();
+
+            recording = new Recording();
+            File outputFile = new File(getFilesDir(), recording.getVideoFilename());
+            recording.setVideoPath(outputFile.getAbsolutePath());
+
+            String outputPath = recording.getVideoPath();
+            if (outputPath == null) {
+                Log.d("TAG", "output path was null");
+                return;
+            }
+
+            FileUtils.copyFile(sourcePath, outputPath);
+        }
+
+        onBackPressed();
     }
 
     @Override

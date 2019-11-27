@@ -58,6 +58,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:elevation="4dp"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="@id/card"
         app:layout_constraintEnd_toEndOf="@id/card"
         app:layout_constraintStart_toStartOf="@id/card"

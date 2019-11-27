@@ -5,17 +5,13 @@ import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.armpatch.android.videojournal.R;
 import com.armpatch.android.videojournal.model.Recording;
@@ -126,8 +122,8 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
 
     private void showNewEntryDialog() {
         final Dialog dialog = new Dialog(this);
-
         dialog.setContentView(R.layout.dialog_new_entry);
+
         View folderButton = dialog.findViewById(R.id.folder_button_container);
         final View cameraButton = dialog.findViewById(R.id.camera_button_container);
 
@@ -135,17 +131,19 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
             @Override
             public void onClick(View v) {
                 dialog.cancel();
-                startActivity(RecordingEditorActivity.getIntent(RecordingListActivity.this));
+                startActivity(RecordingEditorActivity.getIntent(
+                        RecordingListActivity.this,
+                        RecordingEditorActivity.ACTION_RECORD_VIDEO));
             }
         });
 
         folderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RecordingListActivity.this,
-                        "FEATURE NOT AVAILABLE" ,
-                        Toast.LENGTH_SHORT)
-                        .show();
+                dialog.cancel();
+                startActivity(RecordingEditorActivity.getIntent(
+                        RecordingListActivity.this,
+                        RecordingEditorActivity.ACTION_CHOOSE_VIDEO));
             }
         });
 
