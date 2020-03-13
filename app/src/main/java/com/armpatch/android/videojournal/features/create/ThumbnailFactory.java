@@ -1,9 +1,11 @@
-package com.armpatch.android.videojournal.model;
+package com.armpatch.android.videojournal.features.create;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
+
+import com.armpatch.android.videojournal.domain.Recording;
 
 import java.io.File;
 import java.io.FileNotFoundException;

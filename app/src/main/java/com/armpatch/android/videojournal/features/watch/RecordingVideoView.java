@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.view;
+package com.armpatch.android.videojournal.features.watch;
 
 import android.content.Context;
 import android.util.AttributeSet;

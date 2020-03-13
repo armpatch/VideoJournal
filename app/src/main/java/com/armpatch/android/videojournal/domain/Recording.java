@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.model;
+package com.armpatch.android.videojournal.domain;
 
 import java.util.Date;
 import java.util.UUID;
@@ -34,7 +34,7 @@ public class Recording {
         return "VIDEO_" + id + ".mp4";
     }
 
-    String getImageFilename() {
+    public String getImageFilename() {
         String id = getId().toString();
         id = id.substring(0,15);
         return "VIDEO_THUMB_" + id + ".png";

@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.util;
+package com.armpatch.android.videojournal.features.home;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

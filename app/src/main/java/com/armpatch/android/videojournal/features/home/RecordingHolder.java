@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.recyclerview;
+package com.armpatch.android.videojournal.features.home;
 
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -10,9 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.model.Recording;
-import com.armpatch.android.videojournal.util.PictureUtils;
-import com.armpatch.android.videojournal.util.TextFormatter;
+import com.armpatch.android.videojournal.domain.Recording;
+import com.armpatch.android.videojournal.tools.TextFormatter;
 
 public class RecordingHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener{
@@ -48,7 +47,7 @@ public class RecordingHolder extends RecyclerView.ViewHolder
         itemView.setOnClickListener(this);
     }
 
-    void bind(Recording recording) {
+    public void bind(Recording recording) {
         this.recording = recording;
         title.setText(recording.title);
 

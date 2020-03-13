@@ -1,11 +1,11 @@
-package com.armpatch.android.videojournal.database;
+package com.armpatch.android.videojournal.storage;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.armpatch.android.videojournal.model.Recording;
+import com.armpatch.android.videojournal.domain.Recording;
 
-import com.armpatch.android.videojournal.database.DatabaseSchema.RecordingTable;
+import com.armpatch.android.videojournal.storage.DatabaseSchema.RecordingTable;
 
 import java.util.Date;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.activity;
+package com.armpatch.android.videojournal.features.watch;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,12 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.animation.FadeAnimator;
-import com.armpatch.android.videojournal.model.Recording;
-import com.armpatch.android.videojournal.model.RecordingFactory;
-import com.armpatch.android.videojournal.util.TextFormatter;
-import com.armpatch.android.videojournal.view.ExpandingImageView;
-import com.armpatch.android.videojournal.view.RecordingVideoView;
+import com.armpatch.android.videojournal.domain.Recording;
+import com.armpatch.android.videojournal.domain.RecordingFactory;
+import com.armpatch.android.videojournal.tools.TextFormatter;
 
 import java.util.UUID;
 

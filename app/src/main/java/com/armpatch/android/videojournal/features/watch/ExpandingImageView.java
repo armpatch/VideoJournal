@@ -1,10 +1,8 @@
-package com.armpatch.android.videojournal.view;
+package com.armpatch.android.videojournal.features.watch;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-
-import com.armpatch.android.videojournal.animation.ExpandingAppearAnimator;
 
 import org.jetbrains.annotations.Nullable;
 

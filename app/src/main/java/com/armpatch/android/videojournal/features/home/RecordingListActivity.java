@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.activity;
+package com.armpatch.android.videojournal.features.home;
 
 import android.Manifest;
 import android.app.ActivityOptions;
@@ -14,10 +14,10 @@ import android.util.Pair;
 import android.view.View;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.model.Recording;
-import com.armpatch.android.videojournal.model.RecordingFactory;
-import com.armpatch.android.videojournal.recyclerview.RecordingAdapter;
-import com.armpatch.android.videojournal.recyclerview.RecordingHolder;
+import com.armpatch.android.videojournal.features.create.RecordingEditorActivity;
+import com.armpatch.android.videojournal.features.watch.RecordingViewerActivity;
+import com.armpatch.android.videojournal.domain.Recording;
+import com.armpatch.android.videojournal.domain.RecordingFactory;
 
 import java.util.ArrayList;
 import java.util.List;

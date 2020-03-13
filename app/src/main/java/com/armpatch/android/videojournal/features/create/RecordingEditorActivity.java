@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.activity;
+package com.armpatch.android.videojournal.features.create;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,10 +23,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.model.Recording;
-import com.armpatch.android.videojournal.model.RecordingFactory;
-import com.armpatch.android.videojournal.model.ThumbnailFactory;
-import com.armpatch.android.videojournal.util.FileUtils;
+import com.armpatch.android.videojournal.domain.Recording;
+import com.armpatch.android.videojournal.domain.RecordingFactory;
 
 import java.io.File;
 import java.util.List;

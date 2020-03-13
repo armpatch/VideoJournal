@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.util;
+package com.armpatch.android.videojournal.features.create;
 
 import android.content.Context;
 import android.database.Cursor;

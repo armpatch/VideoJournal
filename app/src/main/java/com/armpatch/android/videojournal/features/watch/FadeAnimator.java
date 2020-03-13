@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.animation;
+package com.armpatch.android.videojournal.features.watch;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;

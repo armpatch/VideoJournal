@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.recyclerview;
+package com.armpatch.android.videojournal.features.home;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.model.Recording;
+import com.armpatch.android.videojournal.domain.Recording;
 
 import java.util.List;
 

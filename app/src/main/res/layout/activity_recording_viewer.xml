@@ -64,7 +64,7 @@
         app:layout_constraintStart_toStartOf="@id/card"
         app:layout_constraintTop_toBottomOf="@id/date">
 
-        <com.armpatch.android.videojournal.view.RecordingVideoView
+        <com.armpatch.android.videojournal.features.watch.RecordingVideoView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -84,14 +84,14 @@
             android:layout_gravity="center_horizontal|center_vertical"
             tools:background="@drawable/ic_pause">
 
-            <com.armpatch.android.videojournal.view.ExpandingImageView
+            <com.armpatch.android.videojournal.features.watch.ExpandingImageView
                 android:id="@+id/play_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_play"
                 android:visibility="invisible" />
 
-            <com.armpatch.android.videojournal.view.ExpandingImageView
+            <com.armpatch.android.videojournal.features.watch.ExpandingImageView
                 android:id="@+id/pause_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

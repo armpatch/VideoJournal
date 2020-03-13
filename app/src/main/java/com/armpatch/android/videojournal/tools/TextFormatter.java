@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.util;
+package com.armpatch.android.videojournal.tools;
 
 import android.annotation.SuppressLint;
 
