@@ -34,7 +34,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recording_list_activity);
+        setContentView(R.layout.activity_recording_list);
 
         revealFrame = findViewById(R.id.circular_reveal);
         recyclerView = findViewById(R.id.recycler_view);

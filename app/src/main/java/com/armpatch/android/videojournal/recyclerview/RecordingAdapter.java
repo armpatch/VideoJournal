@@ -17,7 +17,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingHolder> {
     private Context activityContext;
     private List<Recording> recordings;
 
-    public RecordingAdapter(Context activityContext, List<Recording> recordings) {
+public RecordingAdapter(Context activityContext, List<Recording> recordings) {
         this.activityContext = activityContext;
         this.recordings = recordings;
     }
@@ -26,7 +26,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingHolder> {
     @Override
     public RecordingHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(activityContext)
-                .inflate(R.layout.recording_list_item, viewGroup, false);
+                .inflate(R.layout.list_item_recording, viewGroup, false);
 
         return new RecordingHolder(view);
     }

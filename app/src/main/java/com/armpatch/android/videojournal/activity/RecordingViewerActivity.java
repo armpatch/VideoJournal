@@ -55,7 +55,7 @@ public class RecordingViewerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recording_viewer_activity);
+        setContentView(R.layout.activity_recording_viewer);
 
         getRecordingFromIntent();
         setupViews();
