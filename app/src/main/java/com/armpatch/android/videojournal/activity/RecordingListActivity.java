@@ -2,6 +2,7 @@ package com.armpatch.android.videojournal.activity;
 
 import android.Manifest;
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,7 +25,8 @@ import java.util.List;
 public class RecordingListActivity extends AppCompatActivity implements RecordingHolder.Callbacks {
 
     RecyclerView recyclerView;
-    FloatingActionButton fab;
+    View revealFrame;
+    FloatingActionButton floatingButton;
 
     private RecordingAdapter recordingAdapter;
 
@@ -32,16 +34,16 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recording_list_activity);
+        setContentView(R.layout.activity_recording_list);
 
+        revealFrame = findViewById(R.id.circular_reveal);
         recyclerView = findViewById(R.id.recycler_view);
 
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        floatingButton = findViewById(R.id.fab);
+        floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = RecordingEditorActivity.getIntent(RecordingListActivity.this);
-                startActivity(intent);
+                showNewEntryDialog();
             }
         });
 
@@ -78,6 +80,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     protected void onResume() {
         super.onResume();
+        revealFrame.setVisibility(View.INVISIBLE);
         updateRecyclerView();
     }
 
@@ -115,5 +118,35 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
                 .toBundle();
 
         startActivity(intent, bundle);
+    }
+
+    private void showNewEntryDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_new_entry);
+
+        View folderButton = dialog.findViewById(R.id.folder_button_container);
+        final View cameraButton = dialog.findViewById(R.id.camera_button_container);
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                startActivity(RecordingEditorActivity.getIntent(
+                        RecordingListActivity.this,
+                        RecordingEditorActivity.ACTION_RECORD_VIDEO));
+            }
+        });
+
+        folderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                startActivity(RecordingEditorActivity.getIntent(
+                        RecordingListActivity.this,
+                        RecordingEditorActivity.ACTION_CHOOSE_VIDEO));
+            }
+        });
+
+        dialog.show();
     }
 }

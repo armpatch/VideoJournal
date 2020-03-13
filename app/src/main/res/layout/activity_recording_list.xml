@@ -7,21 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/item_list_background">
 
-    <TextView
-        android:id="@+id/header"
-        style="@style/ListItemSubtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/recording_list_header"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/white"
-        />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -33,10 +18,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        tools:listitem="@layout/recording_list_item">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/list_item_recording">
 
     </android.support.v7.widget.RecyclerView>
+
+    <FrameLayout
+        android:id="@+id/circular_reveal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="invisible"
+        >
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
