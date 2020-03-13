@@ -170,7 +170,7 @@ public class RecordingEditorActivity extends AppCompatActivity{
                 return;
             }
 
-            FileUtils.copyFile(sourcePath, outputPath);
+            FileCopier.copy(sourcePath, outputPath);
         }
 
         onBackPressed();
