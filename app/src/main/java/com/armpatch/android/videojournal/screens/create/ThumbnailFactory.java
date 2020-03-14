@@ -1,11 +1,11 @@
-package com.armpatch.android.videojournal.features.create;
+package com.armpatch.android.videojournal.screens.create;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
 
-import com.armpatch.android.videojournal.domain.Recording;
+import com.armpatch.android.videojournal.data.model.Recording;
 
 import java.io.File;
 import java.io.FileNotFoundException;

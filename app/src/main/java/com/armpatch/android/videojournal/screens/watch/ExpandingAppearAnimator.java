@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.features.watch;
+package com.armpatch.android.videojournal.screens.watch;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

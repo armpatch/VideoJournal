@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.domain;
+package com.armpatch.android.videojournal.data.model;
 
 import java.util.Date;
 import java.util.UUID;

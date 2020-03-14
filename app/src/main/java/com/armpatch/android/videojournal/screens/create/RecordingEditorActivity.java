@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.features.create;
+package com.armpatch.android.videojournal.screens.create;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +23,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.domain.Recording;
-import com.armpatch.android.videojournal.domain.RecordingFactory;
+import com.armpatch.android.videojournal.data.model.Recording;
+import com.armpatch.android.videojournal.data.model.RecordingFactory;
 
 import java.io.File;
 import java.util.List;

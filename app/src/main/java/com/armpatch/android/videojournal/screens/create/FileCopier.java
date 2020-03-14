@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.features.create;
+package com.armpatch.android.videojournal.screens.create;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

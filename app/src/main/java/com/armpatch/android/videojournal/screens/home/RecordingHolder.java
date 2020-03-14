@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.features.home;
+package com.armpatch.android.videojournal.screens.home;
 
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armpatch.android.videojournal.R;
-import com.armpatch.android.videojournal.domain.Recording;
+import com.armpatch.android.videojournal.data.model.Recording;
 import com.armpatch.android.videojournal.tools.TextFormatter;
 
 public class RecordingHolder extends RecyclerView.ViewHolder

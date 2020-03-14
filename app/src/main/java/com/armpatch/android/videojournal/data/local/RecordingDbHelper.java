@@ -1,10 +1,10 @@
-package com.armpatch.android.videojournal.storage;
+package com.armpatch.android.videojournal.data.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.armpatch.android.videojournal.storage.DatabaseSchema.RecordingTable;
+import com.armpatch.android.videojournal.data.local.DatabaseSchema.RecordingTable;
 
 public class RecordingDbHelper extends SQLiteOpenHelper {
 

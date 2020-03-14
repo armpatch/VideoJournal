@@ -1,4 +1,4 @@
-package com.armpatch.android.videojournal.storage;
+package com.armpatch.android.videojournal.data.local;
 
 public class DatabaseSchema {
     public static final class RecordingTable {

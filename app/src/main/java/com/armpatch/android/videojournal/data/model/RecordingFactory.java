@@ -1,19 +1,19 @@
-package com.armpatch.android.videojournal.domain;
+package com.armpatch.android.videojournal.data.model;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.armpatch.android.videojournal.storage.RecordingCursorWrapper;
-import com.armpatch.android.videojournal.storage.RecordingDbHelper;
+import com.armpatch.android.videojournal.data.local.RecordingCursorWrapper;
+import com.armpatch.android.videojournal.data.local.RecordingDbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.armpatch.android.videojournal.storage.DatabaseSchema.RecordingTable.Cols.*;
-import static com.armpatch.android.videojournal.storage.DatabaseSchema.RecordingTable.NAME;
+import static com.armpatch.android.videojournal.data.local.DatabaseSchema.RecordingTable.Cols.*;
+import static com.armpatch.android.videojournal.data.local.DatabaseSchema.RecordingTable.NAME;
 
 public class RecordingFactory {
 
