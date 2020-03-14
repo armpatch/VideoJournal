@@ -43,7 +43,6 @@ public class RecordingViewerActivity extends AppCompatActivity {
 
         Bundle extras = new Bundle();
         extras.putSerializable(Recording.EXTRA_KEY, recordingId);
-
         intent.putExtras(extras);
 
         return intent;
@@ -58,16 +57,13 @@ public class RecordingViewerActivity extends AppCompatActivity {
         setupViews();
         setupVideoPane();
         loadVideoFileInSeparateThread();
-
     }
 
     private void getRecordingFromIntent() {
         UUID recordingId = (UUID) getIntent().getExtras().getSerializable(Recording.EXTRA_KEY);
         recording = RecordingFactory.get(this).getRecording(recordingId);
 
-        if (recording == null) {
-            finish();
-        }
+        if (recording == null) finish();
     }
 
     private void setupViews() {
@@ -79,6 +75,14 @@ public class RecordingViewerActivity extends AppCompatActivity {
 
         expandingPlayIcon = findViewById(R.id.play_icon);
         expandingPauseIcon = findViewById(R.id.pause_icon);
+
+        View root = findViewById(R.id.background);
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void setupVideoPane() {
