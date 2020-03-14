@@ -54,7 +54,7 @@ public class RecordingEditorActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_recording_editor);
+        setContentView(R.layout.activity_recording_creator);
 
         thumbnailView = findViewById(R.id.thumbnail);
         titleText = findViewById(R.id.recording_title);

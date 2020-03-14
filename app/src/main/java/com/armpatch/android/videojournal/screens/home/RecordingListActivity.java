@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.View;
@@ -34,10 +35,12 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recording_list);
+        setContentView(R.layout.activity_recording_history);
 
         revealFrame = findViewById(R.id.circular_reveal);
         recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
 
         floatingButton = findViewById(R.id.fab);
         floatingButton.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +108,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         Pair<View, String> imagePair = new Pair<View, String>(holder.thumbnail, holder.thumbnail.getTransitionName());
         Pair<View, String> titlePair = new Pair<View, String>(holder.title, holder.title.getTransitionName());
         Pair<View, String> datePair = new Pair<View, String>(holder.date, holder.date.getTransitionName());
-        Pair<View, String> cardPair = new Pair<View, String>(holder.cardView, holder.cardView.getTransitionName());
+        Pair<View, String> cardPair = new Pair<View, String>(holder.itemView, holder.itemView.getTransitionName());
 
         Bundle bundle = ActivityOptions
                 .makeSceneTransitionAnimation(
