@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ab47bc</color>
-    <color name="colorPrimaryDark">#790e8b</color>
-    <color name="colorAccent">#9ccc65</color>
+    <color name="light_magenta">#ab47bc</color>
+    <color name="dark_magenta">#790e8b</color>
+    <color name="light_green">#9ccc65</color>
 
-    <color name="item_list_background">#D8D8D8</color>
-    <color name="item_viewer_background">#949494</color>
+    <color name="white">#FFFFFF</color>
+    <color name="off_white">#D8D8D8</color>
+    <color name="light_grey">#949494</color>
+    <color name="darker_grey">#3C3C3C</color>
+    <color name="black">#000000</color>
 
-    <color name="text_white">#FFFFFF</color>
-    <color name="text_black">#000000</color>
-    <color name="hint_text">#D3D3D3</color>
-    <color name="text_background_transparent">#80FFFFFF</color>
-
-
-    <color name="play_pause_icon_outline">#3C3C3C</color>
-    <color name="play_pause_icon_fill">#FFFFFF</color>
-
-    <color name="create_button_tint">#A5D6A7</color>
-
-    <color name="thumbnail_preview_foreground">#66000000</color>
-
-    <color name="list_item_foreground_pressed">#4D000000</color>
 </resources>

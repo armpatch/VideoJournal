@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:text="Choose an option"
-            android:textColor="@color/text_black"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_folder_black_24dp"
                 android:padding="4dp"
 
-                android:tint="@color/colorPrimary"
+                android:tint="@color/light_magenta"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +78,7 @@
                 android:scaleType="fitCenter"
                 android:padding="4dp"
                 android:src="@drawable/ic_camera_alt_black_24dp"
-                android:tint="@color/colorPrimary"
+                android:tint="@color/light_magenta"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
