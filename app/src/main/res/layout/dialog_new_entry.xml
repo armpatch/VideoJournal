@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_folder_black_24dp"
                 android:padding="4dp"
 
-                android:tint="@color/light_magenta"
+                android:tint="@color/light_green"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +78,7 @@
                 android:scaleType="fitCenter"
                 android:padding="4dp"
                 android:src="@drawable/ic_camera_alt_black_24dp"
-                android:tint="@color/light_magenta"
+                android:tint="@color/light_green"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
