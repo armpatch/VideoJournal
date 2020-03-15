@@ -8,9 +8,9 @@
     android:background="@color/light_grey">
 
     <FrameLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/background" />
+        android:layout_height="match_parent" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/card"
@@ -18,15 +18,14 @@
         android:layout_height="300dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
+        android:clickable="true"
         android:transitionName="@string/transition_card"
         app:cardCornerRadius="6dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recording_title"
@@ -63,50 +62,47 @@
         android:id="@+id/video_pane"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:elevation="4dp"
-        android:padding="4dp"
+        android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="@id/card"
         app:layout_constraintEnd_toEndOf="@id/card"
         app:layout_constraintStart_toStartOf="@id/card"
         app:layout_constraintTop_toBottomOf="@id/date">
 
-        <com.armpatch.android.videojournal.screens.watch.RecordingVideoView
-            android:id="@+id/videoview"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="centerInside"
-            />
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:transitionName="@string/transition_photo" />
+            <ImageView
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="@string/transition_photo" />
 
-        <FrameLayout
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            tools:background="@drawable/ic_pause">
+            <com.armpatch.android.videojournal.screens.watch.RecordingVideoView
+                android:id="@+id/videoview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside" />
 
             <com.armpatch.android.videojournal.screens.watch.ExpandingImageView
                 android:id="@+id/play_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_play"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                tools:visibility="visible" />
 
             <com.armpatch.android.videojournal.screens.watch.ExpandingImageView
                 android:id="@+id/pause_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_pause"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:visibility="visible" />
 
-        </FrameLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </FrameLayout>
 

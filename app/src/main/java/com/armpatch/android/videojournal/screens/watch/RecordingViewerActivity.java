@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +31,7 @@ public class RecordingViewerActivity extends AppCompatActivity {
     private TextView title, date;
     private RecordingVideoView videoView;
     private ImageView placeholder;
-    private FrameLayout videoPane;
+    private View videoPane;
     private ExpandingImageView expandingPlayIcon;
     private ExpandingImageView expandingPauseIcon;
 
