@@ -30,7 +30,7 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     FloatingActionButton floatingButton;
 
     private RecordingAdapter recordingAdapter;
-
+    private boolean previewMode = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,12 +91,29 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
         RecordingFactory recordingFactory = RecordingFactory.get(this);
         List<Recording> recordings = recordingFactory.getRecordings();
 
+        if (previewMode) setPreviewList(recordings);
+
         if (recordingAdapter == null) {
             recordingAdapter = new RecordingAdapter(this, recordings);
             recyclerView.setAdapter(recordingAdapter);
         } else {
             recordingAdapter.setRecordings(recordings);
             recordingAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * replaced all recordings multiple copies of the first recording.
+     * @param recordings
+     */
+    private void setPreviewList(List<Recording> recordings) {
+        if (recordings.size() == 0) return;
+
+        Recording firstRecording = recordings.get(0);
+        recordings.clear();
+
+        for (int i = 1; i <= 6; i++) {
+            recordings.add(firstRecording);
         }
     }
 
